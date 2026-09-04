@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Kalam:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chewy&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Kalam:wght@400;700&display=swap");
+@import url("https://db.onlinewebfonts.com/c/6d89b27c9c567d19b7ec482c8d21e4a8?family=Coffee+Normal");
 
 :root {
   font-family: "DM Sans", sans-serif;
@@ -547,14 +548,350 @@ button {
 
 /* Landing page */
 .intro-landing {
+  position: relative;
   min-height: 100svh;
   overflow: hidden;
   color: #bdeeff;
-  background: #d92836;
+  background: #5a0e24;
+}
+
+.intro-landing::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg width='260' height='230' viewBox='0 0 260 230' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M31 28c11-12 27-5 25 9-2 16-22 19-29 8-5-9 0-14 9-17M43 20l7-8M79 24l18 7-7 15-18-7zM83 31l7 3M134 17c-8 4-11 14-6 21 5 8 16 10 24 5M125 15l-5-8M168 29c8-12 28-12 36 1-8 13-28 13-36-1zM174 29l24 0M222 15l9 28M216 34l19-12'/%3E%3Cpath d='M22 101c9-15 30-16 39-2-10 15-30 15-39 2zM78 90c11 0 16 15 6 22-9 6-21-3-16-13 2-5 5-8 10-9M117 88l13 12-11 14-13-12zM157 95c11-8 28-4 33 9-9 10-25 12-35 3M202 89l12 27M196 107l25-9'/%3E%3Cpath d='M36 158c10-8 25-3 27 9-5 10-19 14-29 7M83 150c6 13 4 26-6 35M78 158l12 0M123 161c8-12 24-12 32 0-8 12-24 12-32 0zM174 151c10 4 13 18 5 26-8 7-22 2-23-9-1-8 7-15 18-17M215 151l20 16-20 16z'/%3E%3Cpath d='M15 205h40M25 196l6-12 7 12M70 207c9-14 30-14 39 0M134 195c5-10 19-10 24 0l-12 17zM187 206c6-13 20-18 33-11M205 183l3 14'/%3E%3Ccircle cx='111' cy='53' r='3'/%3E%3Ccircle cx='225' cy='67' r='3'/%3E%3Ccircle cx='57' cy='64' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 260px 230px;
+}
+
+/* Full food-icon collection supplied by the user, used as the subtle hero texture. */
+.intro-landing::before {
+  opacity: 0.14;
+  background-image: url("/food-line-pattern.png");
+  background-size: 460px auto;
+  background-position: center;
+}
+
+.fridge-intro {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 18px;
+  overflow: hidden;
+  background: #5a0e24;
+  isolation: isolate;
+}
+
+.fridge-intro::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  opacity: 0.17;
+  background-image: url("/food-line-pattern.png");
+  background-position: center;
+  background-size: 460px auto;
+}
+
+.fridge-intro-copy {
+  display: grid;
+  gap: 5px;
+  place-items: center;
+  color: #f8de22;
+  font-family: "DM Sans", sans-serif;
+  text-align: center;
+}
+
+.fridge-intro-copy span {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.fridge-intro-copy p,
+.fridge-tap-hint {
+  margin: 0;
+  color: #bdeeff;
+  font-size: 0.96rem;
+}
+
+.fridge-unit {
+  position: relative;
+  width: min(620px, 78vw);
+  height: min(660px, 70svh);
+  border: 8px solid #f8de22;
+  border-radius: 30px;
+  background: #a56720;
+  box-shadow: 0 26px 0 rgba(48, 5, 18, 0.34), 0 36px 55px rgba(29, 3, 12, 0.38);
+  perspective: 1100px;
+}
+
+.fridge-cavity {
+  position: absolute;
+  inset: 6px 6px auto;
+  height: 47%;
+  overflow: hidden;
+  border-radius: 20px 20px 12px 12px;
+  background: linear-gradient(115deg, #2d0d1a, #6d2136 58%, #2d0d1a);
+  box-shadow: inset 0 0 32px rgba(0, 0, 0, 0.55);
+}
+
+.fridge-light {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff6ad;
+  box-shadow: 0 0 24px 11px rgba(255, 243, 152, 0.4);
+}
+
+.fridge-shelf {
+  position: absolute;
+  right: 14%;
+  left: 14%;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(189, 238, 255, 0.38);
+}
+
+.fridge-shelf-one { top: 42%; }
+.fridge-shelf-two { top: 72%; }
+
+.fridge-door {
+  position: absolute;
+  right: 6px;
+  left: 6px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 21px;
+  background: linear-gradient(118deg, #f8de22 0%, #ffed77 43%, #dfaa33 100%);
+  box-shadow: inset -12px 0 16px rgba(142, 76, 20, 0.14), inset 5px 0 8px rgba(255, 255, 255, 0.35);
+}
+
+.fridge-door-top {
+  top: 6px;
+  width: calc(50% - 5px);
+  height: calc(47% - 6px);
+  z-index: 2;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 760ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 180ms ease;
+}
+
+.fridge-door-top:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.fridge-door-top:focus-visible {
+  outline: 4px solid #bdeeff;
+  outline-offset: 8px;
+}
+
+.fridge-door-top:disabled { cursor: default; }
+
+.fridge-door-bottom {
+  bottom: 6px;
+  width: calc(50% - 5px);
+  height: calc(53% - 7px);
+}
+
+.fridge-door-left {
+  right: auto;
+  left: 6px;
+}
+
+.fridge-door-right {
+  right: 6px;
+  left: auto;
+}
+
+.fridge-door-top.fridge-door-left {
+  transform-origin: left center;
+}
+
+.fridge-door-top.fridge-door-right {
+  transform-origin: right center;
+}
+
+.fridge-door-shine {
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  left: -22%;
+  width: 54%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.24);
+  transform: rotate(12deg);
+}
+
+.fridge-magnet {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: clamp(48px, 7vw, 78px);
+  height: clamp(39px, 5.8vw, 62px);
+  place-items: center;
+  overflow: hidden;
+  border: 3px solid #5a0e24;
+  border-radius: 42% 55% 48% 58% / 45% 46% 57% 50%;
+  background: #fff5bb;
+  box-shadow: inset 3px 3px 2px rgba(255, 255, 255, 0.7), inset -4px -5px 5px rgba(90, 14, 36, 0.2), 0 4px 0 rgba(90, 14, 36, 0.72), 0 8px 12px rgba(52, 8, 21, 0.28);
+  pointer-events: none;
+}
+
+.fridge-magnet svg {
+  position: relative;
+  z-index: 1;
+  width: 74%;
+  height: 74%;
+  stroke-width: 2.8;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.55));
+}
+
+.fridge-magnet::before {
+  position: absolute;
+  top: 9%;
+  left: 15%;
+  width: 42%;
+  height: 14%;
+  border-radius: 50%;
+  content: "";
+  background: rgba(255, 255, 255, 0.42);
+  transform: rotate(-15deg);
+}
+
+.fridge-magnet-bus {
+  top: 12%;
+  left: 10%;
+  color: #2e9b7d;
+  background: #baf0d4;
+  transform: rotate(-9deg);
+}
+
+.fridge-magnet-cat {
+  bottom: 12%;
+  left: 34%;
+  color: #dd653d;
+  background: #ffd3a1;
+  transform: rotate(11deg);
+}
+
+.fridge-magnet-taxi {
+  top: 26%;
+  right: 15%;
+  color: #277ab0;
+  background: #bdeeff;
+  transform: rotate(7deg);
+}
+
+.fridge-magnet-rabbit {
+  right: 8%;
+  bottom: 9%;
+  color: #4d9d67;
+  background: #cef1ba;
+  transform: rotate(-12deg);
+}
+
+.fridge-handle {
+  position: absolute;
+  top: 24%;
+  bottom: 24%;
+  left: 20px;
+  width: 13px;
+  border-radius: 999px;
+  background: #8bd6f5;
+  box-shadow: inset 2px 0 2px rgba(255, 255, 255, 0.5), 2px 2px 0 rgba(77, 102, 117, 0.22);
+}
+
+.fridge-door-left .fridge-handle {
+  right: 20px;
+  left: auto;
+}
+
+.fridge-intro-opening .fridge-door-top.fridge-door-left {
+  transform: rotateY(105deg);
+}
+
+.fridge-intro-opening .fridge-door-top.fridge-door-right {
+  transform: rotateY(-105deg);
+}
+
+.fridge-intro-opening {
+  pointer-events: none;
+  animation: fridge-zoom-inside 1s cubic-bezier(0.3, 0.82, 0.3, 1) forwards;
+}
+
+.fridge-tap-hint {
+  position: absolute;
+  bottom: 17%;
+  z-index: 3;
+  display: grid;
+  width: max-content;
+  margin: 0;
+  min-height: clamp(46px, 5.2vw, 64px);
+  padding: 0.2em 0.52em 0.1em;
+  place-items: center;
+  overflow: hidden;
+  color: #5a0e24;
+  font-family: "Coffee Normal", "Chewy", "Kalam", cursive;
+  font-size: clamp(1.45rem, 3.2vw, 2.65rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 0 rgba(255, 245, 147, 0.5);
+  border: 3px solid #5a0e24;
+  border-radius: 44% 56% 48% 57% / 48% 45% 58% 52%;
+  background: #bdeeff;
+  box-shadow: inset 3px 3px 2px rgba(255, 255, 255, 0.7), inset -4px -5px 5px rgba(43, 83, 102, 0.24), 0 4px 0 rgba(90, 14, 36, 0.68), 0 8px 12px rgba(52, 8, 21, 0.24);
+}
+
+.fridge-tap-hint::before {
+  position: absolute;
+  top: 10%;
+  left: 14%;
+  width: 44%;
+  height: 16%;
+  border-radius: 50%;
+  content: "";
+  background: rgba(255, 255, 255, 0.5);
+  transform: rotate(-12deg);
+}
+
+.fridge-tap-hint-left {
+  left: 25%;
+  transform: translateX(-50%);
+}
+
+.fridge-tap-hint-right {
+  left: 75%;
+  background: #ffd3a1;
+  transform: translateX(-50%);
+}
+
+@keyframes fridge-zoom-inside {
+  0%,
+  38% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
 }
 
 .intro-layout {
   position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(390px, 0.85fr);
   align-items: center;
@@ -568,9 +905,12 @@ button {
   z-index: 1;
   justify-self: start;
   width: min(760px, 58vw);
+  animation: chef-to-left 3.2s cubic-bezier(0.22, 0.85, 0.28, 1) both;
 }
 
 .static-chef-image {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   max-height: 92svh;
@@ -578,6 +918,146 @@ button {
   user-select: none;
   pointer-events: none;
   filter: drop-shadow(0 18px 0 rgba(105, 18, 28, 0.22));
+}
+
+.chef-water-backdrop {
+  position: absolute;
+  inset: -12% -34% -10%;
+  z-index: 0;
+  width: 168%;
+  height: 126%;
+  overflow: visible;
+  background: transparent;
+  opacity: 0;
+  transform: scale(0.68) rotate(-8deg);
+  transform-origin: center;
+  transition: opacity 450ms ease, transform 1.1s cubic-bezier(0.2, 0.85, 0.28, 1);
+}
+
+.water-fill {
+  fill: #bdeeff;
+  stroke: #8bd6f5;
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.water-dashed-outline {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 31;
+  stroke-dasharray: 18 34;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* This burgundy layer creates a clear breathing space before the water edge. */
+.water-outline-gap {
+  fill: none;
+  stroke: #5a0e24;
+  stroke-width: 25;
+  stroke-linejoin: round;
+}
+
+.water-ripple,
+.water-squiggle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 12;
+}
+
+.water-squiggle {
+  stroke-width: 8;
+}
+
+.water-ripple-two {
+  stroke-width: 10;
+}
+
+.water-ripple-three {
+  stroke-width: 9;
+}
+
+.chef-water-backdrop-visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.food-orbit {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.food-orbit-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: clamp(30px, 3.1vw, 48px);
+  height: clamp(30px, 3.1vw, 48px);
+  place-items: center;
+  color: #f8de22;
+  opacity: 1;
+  filter: none;
+  will-change: transform;
+  animation: food-orbit var(--orbit-duration) linear infinite;
+}
+
+.food-orbit-item svg {
+  width: 100%;
+  height: 100%;
+  fill: rgba(248, 222, 34, 0.18);
+  stroke: #f8de22;
+  stroke-width: 2.7;
+}
+
+.food-orbit-paused .food-orbit-item {
+  animation-play-state: paused;
+}
+
+.food-orbit-leaving .food-orbit-item {
+  animation: food-orbit-vanish 520ms ease-out forwards;
+  animation-play-state: running;
+}
+
+@keyframes chef-to-left {
+  0%,
+  64% {
+    transform: translateX(28vw) scale(1.13);
+  }
+
+  73% {
+    transform: translateX(29vw) scale(1.08, 0.96);
+  }
+
+  100% {
+    transform: translateX(0) scale(0.92);
+  }
+}
+
+@keyframes food-orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--start-angle)) translateX(var(--orbit-radius)) rotate(var(--counter-angle));
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(var(--end-angle)) translateX(var(--orbit-radius)) rotate(var(--end-counter-angle));
+  }
+}
+
+@keyframes food-orbit-vanish {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--pause-angle)) translateX(var(--orbit-radius)) rotate(var(--pause-counter-angle));
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--pause-angle)) translateX(var(--orbit-radius)) rotate(var(--pause-counter-angle)) scale(0.45);
+  }
 }
 
 .cartoon-scene {
@@ -1067,17 +1547,18 @@ button {
 
 .intro-title {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  max-width: 700px;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  max-width: 820px;
   margin: 0;
   color: #bdeeff;
-  font-family: "Kalam", "Comic Sans MS", cursive;
-  font-size: clamp(4rem, 8.6vw, 9.2rem);
-  font-weight: 700;
-  line-height: 0.86;
-  letter-spacing: -0.075em;
-  text-shadow: 0 6px 0 rgba(104, 19, 30, 0.2);
+  font-family: "Coffee Normal", "Chewy", "Kalam", cursive;
+  font-size: clamp(5.5rem, 10.1vw, 11.8rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-shadow: 0 7px 0 rgba(104, 19, 30, 0.28), 0 18px 28px rgba(91, 14, 26, 0.2);
 }
 
 .intro-title-letter,
@@ -1085,17 +1566,81 @@ button {
   display: inline-block;
 }
 
+.intro-title-row {
+  display: flex;
+  align-items: baseline;
+  min-height: 0.9em;
+  transform-origin: left center;
+  animation: title-row-sway 5.8s ease-in-out 5.6s infinite;
+}
+
+.intro-title-row-to {
+  margin-left: 1.15em;
+  font-size: 0.47em;
+  letter-spacing: -0.02em;
+}
+
+.intro-title-row-fridge,
+.intro-title-row-recipe {
+  color: #f8de22;
+  text-shadow: 0 5px 0 #a81e2e, 0 0 18px rgba(255, 239, 115, 0.3), 0 18px 28px rgba(91, 14, 26, 0.24);
+}
+
+.intro-title-row-recipe {
+  animation-delay: 5.95s;
+}
+
 .intro-title-letter {
   will-change: transform;
 }
 
 .intro-title-letter-inner {
-  animation: title-idle 4.3s ease-in-out infinite;
+  position: relative;
+  animation: title-idle 3.9s ease-in-out infinite;
+}
+
+.intro-title:hover .intro-title-letter-inner {
+  animation-duration: 2.2s;
+  filter: brightness(1.12) drop-shadow(0 0 8px rgba(255, 243, 142, 0.52));
+}
+
+/* Small hand-drawn strokes echo the lettering details in the reference wordmark. */
+.intro-title-letter:nth-child(1) .intro-title-letter-inner::before,
+.intro-title-letter:nth-child(4) .intro-title-letter-inner::before,
+.intro-title-letter:nth-child(8) .intro-title-letter-inner::before,
+.intro-title-letter:nth-child(12) .intro-title-letter-inner::before {
+  position: absolute;
+  top: -0.12em;
+  left: 0.28em;
+  width: 0.34em;
+  height: 0.035em;
+  content: "";
+  background: #7ba9ba;
+  border-radius: 999px;
+  transform: rotate(-9deg);
+}
+
+.intro-title-letter:nth-child(2) .intro-title-letter-inner::after,
+.intro-title-letter:nth-child(6) .intro-title-letter-inner::after,
+.intro-title-letter:nth-child(10) .intro-title-letter-inner::after,
+.intro-title-letter:nth-child(15) .intro-title-letter-inner::after {
+  position: absolute;
+  bottom: -0.09em;
+  left: 0.35em;
+  width: 0.28em;
+  height: 0.035em;
+  content: "";
+  background: #7ba9ba;
+  border-radius: 999px;
+  transform: rotate(8deg);
 }
 
 .intro-title-space {
-  width: 0.23em;
+  flex-basis: 100%;
+  width: 0;
+  height: 0;
 }
+
 
 .intro-cta {
   display: inline-flex;
@@ -1545,11 +2090,30 @@ button {
 @keyframes title-idle {
   0%,
   100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+
+  35% {
+    transform: translateY(-7px) rotate(-0.8deg) scale(1.025);
+  }
+
+  65% {
+    transform: translateY(-2px) rotate(0.65deg) scale(1.008);
+  }
+}
+
+@keyframes title-row-sway {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
 
-  50% {
-    transform: translateY(-5px) rotate(0.5deg);
+  45% {
+    transform: translateY(-4px) rotate(-0.35deg);
+  }
+
+  70% {
+    transform: translateY(1px) rotate(0.22deg);
   }
 }
 
@@ -1587,11 +2151,21 @@ button {
   }
 
   .intro-title {
-    font-size: clamp(3.5rem, 8.3vw, 6.3rem);
+    font-size: clamp(4rem, 9.2vw, 7.4rem);
   }
 }
 
 @media (max-width: 760px) {
+  .fridge-intro { gap: 14px; }
+
+  .fridge-unit {
+    width: min(440px, 88vw);
+    height: min(570px, 64svh);
+    border-radius: 25px;
+  }
+
+  .fridge-intro-copy span { font-size: 0.67rem; }
+
   .app-shell {
     padding: 28px 18px 54px;
   }
@@ -1653,6 +2227,7 @@ button {
   .cartoon-scene-stage {
     align-self: end;
     width: min(490px, 92vw);
+    animation-name: chef-to-left-mobile;
   }
 
   .cartoon-scene {
@@ -1676,12 +2251,29 @@ button {
 
   .intro-title {
     justify-content: center;
-    font-size: clamp(3.2rem, 14.4vw, 6rem);
+    align-items: center;
+    font-size: clamp(3.7rem, 15.6vw, 7rem);
     line-height: 0.88;
   }
 
   .intro-cta {
     margin-top: 25px;
+  }
+
+  .food-orbit-item {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@keyframes chef-to-left-mobile {
+  0%,
+  64% {
+    transform: translateY(0) scale(1.08);
+  }
+
+  100% {
+    transform: translate(-8vw, 0) scale(0.92);
   }
 }
 
@@ -1725,12 +2317,15 @@ button {
   .spin,
   .intro-chef,
   .intro-chef-scene,
+  .cartoon-scene-stage,
   .chef-right-blink,
   .knife-glint,
   .chicken-mouth,
   .chicken-shout,
   .chicken-motion,
   .chef-steam i,
+  .fridge-tap-hint,
+  .intro-title-row,
   .intro-title-letter-inner {
     animation: none;
   }
@@ -1738,5 +2333,11 @@ button {
   .intro-cta,
   .intro-cta svg {
     transition: none;
+  }
+
+  .fridge-intro-opening,
+  .fridge-door-top {
+    transition: none;
+    animation: none;
   }
 }
