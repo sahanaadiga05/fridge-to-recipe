@@ -1,0 +1,69 @@
+import { motion } from "framer-motion";
+import { ChefHat, Clock3, Leaf } from "lucide-react";
+import IngredientList from "./IngredientList";
+import RecipeSteps from "./RecipeSteps";
+
+
+function RecipeDashboard({
+  recipe,
+  servings,
+  onServingsChange,
+  completedSteps,
+  onToggleStep,
+  swappedIngredients,
+  openSwap,
+  onOpenSwap,
+  onChooseSwap,
+}) {
+  return (
+    <motion.section
+      className="recipe-dashboard"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <article className="recipe-intro">
+        <div>
+          <p className="eyebrow">
+            <Leaf size={15} />
+            Made from your kitchen
+          </p>
+          <h2>{recipe.title}</h2>
+          <p>{recipe.description}</p>
+        </div>
+
+        <div className="recipe-meta">
+          <span>
+            <Clock3 size={17} />
+            {recipe.time}
+          </span>
+          <span>
+            <ChefHat size={17} />
+            {recipe.difficulty}
+          </span>
+        </div>
+      </article>
+
+      <div className="dashboard-grid">
+        <IngredientList
+          ingredients={recipe.ingredients}
+          recipeServings={recipe.servings}
+          servings={servings}
+          onServingsChange={onServingsChange}
+          swappedIngredients={swappedIngredients}
+          openSwap={openSwap}
+          onOpenSwap={onOpenSwap}
+          onChooseSwap={onChooseSwap}
+        />
+
+        <RecipeSteps
+          steps={recipe.steps}
+          completedSteps={completedSteps}
+          onToggleStep={onToggleStep}
+        />
+      </div>
+    </motion.section>
+  );
+}
+
+export default RecipeDashboard;
