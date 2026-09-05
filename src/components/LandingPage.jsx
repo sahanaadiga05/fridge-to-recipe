@@ -3,13 +3,13 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, BusFront, CarTaxiFront, Cat, Rabbit } from "lucide-react";
 
 const titleRows = [
-  { text: "FRIDGE", className: "intro-title-row-fridge", delay: 2.05 },
+  { text: "FRiDGe", className: "intro-title-row-fridge", delay: 2.05 },
   { text: "to", className: "intro-title-row-to", delay: 2.95 },
-  { text: "RECIPE", className: "intro-title-row-recipe", delay: 3.35 },
+  { text: "rECiPe", className: "intro-title-row-recipe", delay: 3.35 },
 ];
 function FallingTitle({ shouldReduceMotion }) {
   return (
-    <h1 className="intro-title" aria-label="FRIDGE to RECIPE">
+    <h1 className="intro-title" aria-label="FRiDGe to rECiPe">
       {titleRows.map(({ text, className, delay }, rowIndex) => (
         <span className={`intro-title-row ${className}`} key={text}>
           {Array.from(text).map((letter, index) => {
@@ -120,7 +120,7 @@ function LandingPage({ onGetStarted }) {
 
   return (
     <motion.main
-      className="intro-landing"
+      className={`intro-landing${showHero ? " intro-landing-hero" : ""}`}
       initial={{ opacity: 0 }}
       animate={isLeaving ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.42, ease: "easeInOut" }}
@@ -150,7 +150,7 @@ function LandingPage({ onGetStarted }) {
           <img
             className="static-chef-image"
             src="/chef-reference.png"
-            alt="Comic chef cooking with a chicken and vegetables"
+            alt="Chef cooking with a chicken and vegetables"
           />
         </div>
 

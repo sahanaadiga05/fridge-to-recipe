@@ -555,6 +555,14 @@ button {
   background: #2a835f;
 }
 
+.intro-landing-hero {
+  background: #f72c5b;
+}
+
+.intro-landing-hero::before {
+  opacity: 0.62;
+}
+
 .intro-landing::before {
   position: absolute;
   inset: 0;
@@ -1268,7 +1276,7 @@ button {
 
 .water-dashed-outline {
   fill: none;
-  stroke: #ffffff;
+  stroke: #12544f;
   stroke-width: 31;
   stroke-dasharray: 18 34;
   stroke-linecap: round;
@@ -1281,6 +1289,10 @@ button {
   stroke: #2a835f;
   stroke-width: 25;
   stroke-linejoin: round;
+}
+
+.intro-landing-hero .water-outline-gap {
+  stroke: #f72c5b;
 }
 
 .water-ripple,
@@ -1846,8 +1858,8 @@ button {
 
 .intro-title-row-fridge,
 .intro-title-row-recipe {
-  color: #f8de22;
-  text-shadow: 0 5px 0 #a81e2e, 0 0 18px rgba(255, 239, 115, 0.3), 0 18px 28px rgba(91, 14, 26, 0.24);
+  color: #00E0BA;
+  text-shadow: 0 5px 0 #f8de22, 0 0 18px rgba(248, 222, 34, 0.38), 0 18px 28px rgba(18, 84, 79, 0.22);
 }
 
 .intro-title-row-recipe {
