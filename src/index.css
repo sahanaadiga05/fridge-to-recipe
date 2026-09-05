@@ -38,32 +38,1156 @@ button {
   min-height: 100vh;
   overflow: hidden;
   padding: 42px 6vw 80px;
+  color: #fff9df;
+  background: #2a835f;
 }
 
-.ambient-orb {
+.recipe-kitchen-scene {
+  --ink: #121714;
+  --cream: #fff5e9;
+  --blue: #b7e2ef;
+  --blue-dark: #87b7c7;
+  --gold: #ffc65d;
+  --gold-dark: #ba7a20;
+  --wood: #b56a26;
+  --wood-dark: #74421e;
   position: absolute;
-  z-index: -1;
+  inset: 0;
+  z-index: 0;
+  min-width: 920px;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--cream);
+}
+
+.kitchen-wall-cabinet,
+.kitchen-hood,
+.kitchen-fridge-drawn,
+.kitchen-counter,
+.kitchen-lower-cabinets,
+.kitchen-floor {
+  position: absolute;
+}
+
+.kitchen-wall-cabinet {
+  top: 1.8%;
+  left: 33%;
+  width: 38%;
+  height: 25%;
+  border: 5px solid var(--ink);
+  background: #9d9079;
+  box-shadow: 12px 13px 0 rgba(117, 77, 38, 0.16);
+}
+
+.cabinet-door,
+.cabinet-shelf {
+  position: absolute;
+  display: block;
+}
+
+.cabinet-door {
+  top: -5px;
+  bottom: -5px;
+  width: 27%;
+  border: 5px solid var(--ink);
+  background: var(--wood);
+}
+
+.cabinet-door-left { left: -5px; }
+.cabinet-door-right { right: -5px; }
+
+.cabinet-shelf {
+  left: 27%;
+  width: 46%;
+  height: 50%;
+  border-bottom: 5px solid var(--ink);
+}
+
+.cabinet-shelf-top { top: 0; }
+.cabinet-shelf-bottom { bottom: 0; }
+
+.cabinet-plate,
+.cabinet-cup {
+  position: absolute;
+  z-index: 1;
+  display: block;
+}
+
+.cabinet-plate {
+  width: 19%;
+  height: 7%;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: #fffdf5;
+}
+
+.plate-one { left: 42%; top: 14%; }
+.plate-two { left: 45%; top: 70%; }
+
+.cabinet-cup {
+  top: 14%;
+  width: 12%;
+  height: 24%;
+  border: 3px solid var(--ink);
+  border-radius: 0 0 28% 28%;
+  background: #ffe16d;
+}
+
+.cabinet-cup::after {
+  position: absolute;
+  top: 20%;
+  right: -38%;
+  width: 38%;
+  height: 48%;
+  content: "";
+  border: 3px solid var(--ink);
+  border-left: 0;
+  border-radius: 0 50% 50% 0;
+}
+
+.cup-one { left: 56%; }
+.cup-two { left: 69%; }
+
+.kitchen-hood {
+  top: 0;
+  left: 2%;
+  width: 27%;
+  height: 29%;
+}
+
+.hood-chimney {
+  position: absolute;
+  top: -16%;
+  left: 34%;
+  width: 30%;
+  height: 70%;
+  border: 5px solid var(--ink);
+  border-bottom: 0;
+  background: #c0d8df;
+}
+
+.hood-top {
+  position: absolute;
+  top: 42%;
+  left: 0;
+  width: 100%;
+  height: 37%;
+  clip-path: polygon(35% 0, 65% 0, 100% 76%, 0 76%);
+  background: var(--ink);
+}
+
+.hood-top::after {
+  position: absolute;
+  inset: 5px 5px 0;
+  content: "";
+  clip-path: inherit;
+  background: #d9e8eb;
+}
+
+.hood-base {
+  position: absolute;
+  bottom: 6%;
+  left: 4%;
+  width: 92%;
+  height: 13%;
+  border: 5px solid var(--ink);
+  background: #b9d7de;
+}
+
+.kitchen-fridge-drawn {
+  right: 1.8%;
+  bottom: 7.2%;
+  width: 25%;
+  height: 62%;
+  overflow: visible;
+  border: 5px solid var(--ink);
+  border-radius: 7px 7px 0 0;
+  background: var(--blue);
+  box-shadow: inset 14px 0 0 rgba(255, 255, 255, 0.16);
+}
+
+.fridge-top-door,
+.fridge-bottom-door {
+  position: absolute;
+  left: -5px;
+  width: calc(100% + 10px);
+  border: 5px solid var(--ink);
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.33), transparent 40%), var(--blue);
+}
+
+.fridge-top-door { top: -5px; height: 56%; }
+.fridge-bottom-door { bottom: -5px; height: 44%; }
+
+.fridge-top-door i,
+.fridge-bottom-door i {
+  position: absolute;
+  top: 42%;
+  left: 10%;
+  width: 11%;
+  height: 23%;
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  background: #e3edf0;
+}
+
+.fridge-flower {
+  position: absolute;
+  z-index: 2;
+  top: -27%;
+  left: 15%;
+  width: 46%;
+  height: 27%;
+  border-radius: 48% 48% 40% 40%;
+  background: #af7a25;
+}
+
+.fridge-flower::before,
+.fridge-flower::after {
+  position: absolute;
+  content: "";
+}
+
+.fridge-flower::before {
+  left: 43%;
+  bottom: 88%;
+  width: 7%;
+  height: 56%;
+  background: #527a25;
+}
+
+.fridge-flower::after {
+  top: -96%;
+  left: 16%;
+  width: 66%;
+  aspect-ratio: 1;
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd64d 0 27%, transparent 28%), conic-gradient(#ef7d92 0 12%, transparent 12% 20%, #ef7d92 20% 32%, transparent 32% 40%, #ef7d92 40% 52%, transparent 52% 60%, #ef7d92 60% 72%, transparent 72% 80%, #ef7d92 80% 92%, transparent 92%);
+}
+
+.kitchen-counter {
+  right: 27%;
+  bottom: 32%;
+  left: 1.5%;
+  height: 12%;
+  border-top: 5px solid var(--ink);
+  border-bottom: 5px solid var(--ink);
+  background: #d3e0e2;
+}
+
+.counter-stove {
+  position: absolute;
+  top: -2%;
+  left: 0;
+  width: 31%;
+  height: 100%;
+  border-right: 5px solid var(--ink);
+  background: #f5f5e8;
+}
+
+.counter-stove i {
+  display: inline-block;
+  width: 13%;
+  aspect-ratio: 1;
+  margin: 15% 4% 0 5%;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: #d9dcda;
+}
+
+.counter-kettle {
+  position: absolute;
+  bottom: 17%;
+  left: 6%;
+  width: 18%;
+  aspect-ratio: 1.25;
+  border: 4px solid var(--ink);
+  border-radius: 55% 55% 45% 45%;
+  background: var(--blue);
+}
+
+.counter-kettle::before {
+  position: absolute;
+  top: -30%;
+  left: -11%;
+  width: 68%;
+  height: 40%;
+  content: "";
+  border: 4px solid var(--ink);
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0;
+}
+
+.counter-kettle i {
+  position: absolute;
+  top: 20%;
+  right: -28%;
+  width: 40%;
+  height: 33%;
+  border: 4px solid var(--ink);
+  border-left: 0;
+  transform: skewX(-28deg);
+}
+
+.counter-steam {
+  position: absolute;
+  width: 5%;
+  height: 35%;
+  border: 4px solid var(--ink);
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 60% 0 0 0;
+}
+
+.steam-one { top: -67%; left: 12%; }
+.steam-two { top: -48%; left: 16%; transform: rotate(20deg); }
+
+.fruit-bowl {
+  position: absolute;
+  bottom: 6%;
+  left: 43%;
+  width: 17%;
+  height: 52%;
+  border: 4px solid var(--ink);
+  border-radius: 0 0 48% 48%;
+  background: #e97d8d;
+}
+
+.fruit-bowl i {
+  position: absolute;
+  bottom: 56%;
+  width: 38%;
+  aspect-ratio: 1;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: #ffd954;
+}
+
+.fruit-bowl i:nth-child(1) { left: 4%; }
+.fruit-bowl i:nth-child(2) { left: 31%; bottom: 63%; background: #ffa74a; }
+.fruit-bowl i:nth-child(3) { right: 3%; background: #d5df5f; }
+
+.counter-sink {
+  position: absolute;
+  right: 7%;
+  bottom: 12%;
+  width: 21%;
+  height: 38%;
+  border: 4px solid var(--ink);
+  border-radius: 0 0 50% 50%;
+  background: #e6eef0;
+}
+
+.counter-sink i {
+  position: absolute;
+  bottom: 50%;
+  left: 44%;
+  width: 25%;
+  height: 76%;
+  border: 5px solid var(--ink);
+  border-bottom: 0;
+  border-radius: 30px 30px 0 0;
+}
+
+.counter-plate {
+  position: absolute;
+  right: 20%;
+  bottom: 10%;
+  width: 13%;
+  height: 75%;
+  border: 4px solid var(--ink);
+  border-radius: 50% 50% 10% 10%;
+  background: #fffdf5;
+  transform: rotate(28deg);
+}
+
+.kitchen-lower-cabinets {
+  bottom: 7.2%;
+  left: 1.5%;
+  width: 71.5%;
+  height: 32%;
+  border: 5px solid var(--ink);
+  border-top: 0;
+  background: var(--gold);
+}
+
+.oven {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 35%;
+  border-right: 5px solid var(--ink);
+  background: #d8e1e3;
+}
+
+.oven::before {
+  position: absolute;
+  top: 32%;
+  right: 8%;
+  bottom: 11%;
+  left: 8%;
+  content: "";
+  border: 5px solid var(--ink);
+  background: #97866b;
+}
+
+.oven i {
+  position: absolute;
+  z-index: 1;
+  top: 14%;
+  right: 25%;
+  width: 40%;
+  height: 7%;
+  border: 4px solid var(--ink);
   border-radius: 999px;
-  filter: blur(2px);
-  opacity: 0.45;
-  animation: drift 9s ease-in-out infinite alternate;
+  background: var(--gold);
 }
 
-.orb-one {
-  width: 280px;
-  height: 280px;
-  top: 30%;
-  left: -150px;
-  background: #f7bd8a;
+.oven b {
+  position: absolute;
+  z-index: 1;
+  top: 61%;
+  right: 9%;
+  left: 9%;
+  border-top: 4px solid var(--ink);
 }
 
-.orb-two {
-  width: 340px;
-  height: 340px;
-  right: -190px;
-  bottom: 5%;
-  background: #b6d8b0;
-  animation-delay: -3s;
+.drawer {
+  position: absolute;
+  top: 0;
+  left: 35%;
+  width: 32%;
+  height: 23%;
+  border-right: 5px solid var(--ink);
+  border-bottom: 5px solid var(--ink);
+  background: var(--wood);
+}
+
+.drawer::after {
+  position: absolute;
+  top: 38%;
+  left: 40%;
+  width: 19%;
+  height: 24%;
+  content: "";
+  border: 3px solid var(--ink);
+  border-radius: 7px;
+  background: #dbe4e0;
+}
+
+.lower-door {
+  position: absolute;
+  bottom: 0;
+  height: 77%;
+  border-right: 5px solid var(--ink);
+  background: var(--gold);
+}
+
+.lower-door::after {
+  position: absolute;
+  top: 43%;
+  width: 10%;
+  height: 25%;
+  content: "";
+  border: 4px solid var(--ink);
+  border-radius: 8px;
+  background: #e8f1ef;
+}
+
+.lower-door-one { left: 35%; width: 16%; }
+.lower-door-two { left: 51%; width: 16%; }
+.lower-door-three { left: 67%; width: 33%; }
+.lower-door-one::after { right: 18%; }
+.lower-door-two::after { left: 18%; }
+.lower-door-three::after { left: 12%; }
+
+.kitchen-floor {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 7.2%;
+  background: #80b2c3;
+}
+
+@media (max-width: 760px) {
+  .recipe-kitchen-scene {
+    min-width: 650px;
+    transform: translateX(calc(50vw - 325px));
+    transform-origin: bottom center;
+  }
+}
+
+/* Recipe dashboard kitchen: individually drawn pieces for future animation. */
+.recipe-kitchen-scene {
+  --scene-ink: #364850;
+  --scene-blue: #708ba0;
+  --scene-blue-dark: #577286;
+  --scene-cream: #f4f0e7;
+  --scene-counter: #597b91;
+  --scene-cabinet: #eee0d5;
+  --scene-handle: #8b512f;
+  position: absolute;
+  inset: 0;
+  min-width: 960px;
+  background: var(--scene-cream);
+}
+
+.recipe-kitchen-scene > div,
+.recipe-kitchen-scene span,
+.recipe-kitchen-scene i,
+.recipe-kitchen-scene b {
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+}
+
+.scene-floor {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 14.5%;
+  background: #ccb586;
+}
+
+.scene-fridge {
+  bottom: 14.5%;
+  left: 4.3%;
+  width: 20.8%;
+  height: 77%;
+  overflow: hidden;
+  background: var(--scene-blue);
+  box-shadow: inset -11px 0 0 rgba(50, 73, 87, 0.18);
+}
+
+.scene-fridge-door {
+  left: 0;
+  width: 100%;
+  border-bottom: 2px solid rgba(42, 62, 72, 0.32);
+  background: linear-gradient(115deg, transparent 45%, rgba(255, 255, 255, 0.1) 45% 55%, transparent 55%), var(--scene-blue);
+}
+
+.scene-fridge-freezer { top: 0; height: 60%; }
+.scene-fridge-main { bottom: 0; height: 40%; }
+
+.scene-fridge-door i {
+  top: 31%;
+  right: 10%;
+  width: 7%;
+  height: 38%;
+  background: #dce2dc;
+}
+
+.scene-fridge-note {
+  z-index: 1;
+  top: 24%;
+  left: 42%;
+  width: 29%;
+  height: 13%;
+  background: repeating-linear-gradient(to bottom, #f3eddf 0 19%, #88929a 20% 23%, #f3eddf 24% 34%);
+  transform: rotate(-1deg);
+}
+
+.scene-oven {
+  bottom: 14.5%;
+  left: 25.5%;
+  width: 16.3%;
+  height: 35%;
+  background: var(--scene-blue-dark);
+}
+
+.scene-oven-controls {
+  top: 0;
+  width: 100%;
+  height: 25%;
+  background: #5f8196;
+}
+
+.scene-oven-controls i {
+  top: 28%;
+  width: 12%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #e5e7df;
+}
+
+.scene-oven-controls i:nth-child(1) { left: 12%; }
+.scene-oven-controls i:nth-child(2) { left: 31%; }
+.scene-oven-controls i:nth-child(3) { right: 26%; }
+.scene-oven-controls i:nth-child(4) { right: 8%; }
+
+.scene-oven-window {
+  right: 12%;
+  bottom: 12%;
+  left: 12%;
+  height: 55%;
+  border: 5px solid #567382;
+  background: linear-gradient(120deg, #8bafb9 0 25%, #c6dce0 26% 30%, #8bafb9 31% 52%, #c6dce0 53% 57%, #8bafb9 58%);
+}
+
+.scene-oven-window i {
+  top: -20%;
+  left: 4%;
+  width: 92%;
+  height: 12%;
+  border-radius: 999px;
+  background: #2f4650;
+}
+
+.scene-counter {
+  right: 4.2%;
+  bottom: 47.5%;
+  left: 25.5%;
+  height: 2.5%;
+  background: var(--scene-counter);
+}
+
+.scene-base-cabinets {
+  right: 4.2%;
+  bottom: 14.5%;
+  left: 41.8%;
+  height: 33%;
+  background: var(--scene-cabinet);
+}
+
+.scene-drawer,
+.scene-cabinet-door {
+  border: 1px solid rgba(128, 93, 68, 0.25);
+}
+
+.scene-drawer {
+  left: 0;
+  width: 31%;
+  height: 33.333%;
+}
+
+.scene-drawer::after {
+  top: 40%;
+  left: 37%;
+  width: 24%;
+  height: 9%;
+  content: "";
+  background: var(--scene-handle);
+}
+
+.drawer-a { top: 0; }
+.drawer-b { top: 33.333%; }
+.drawer-c { bottom: 0; }
+
+.scene-cabinet-door {
+  bottom: 0;
+  height: 67%;
+}
+
+.scene-cabinet-door::after {
+  top: 35%;
+  width: 8%;
+  height: 25%;
+  content: "";
+  background: var(--scene-handle);
+}
+
+.door-a { left: 31%; width: 19%; }
+.door-b { left: 50%; width: 19%; }
+.door-c { left: 69%; width: 15.5%; }
+.door-d { right: 0; width: 15.5%; }
+.door-a::after { right: 12%; }
+.door-b::after { left: 12%; }
+.door-c::after { right: 13%; }
+.door-d::after { left: 13%; }
+
+.scene-hood {
+  top: 8.7%;
+  left: 26.7%;
+  width: 17%;
+  height: 21%;
+  background: #30485d;
+  clip-path: polygon(33% 0, 52% 0, 52% 38%, 69% 45%, 84% 100%, 0 100%, 18% 45%, 33% 38%);
+}
+
+.scene-hood::after {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 11%;
+  content: "";
+  background: #678099;
+}
+
+.scene-hood i,
+.scene-hood b {
+  bottom: 8%;
+  width: 6%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #344e50;
+}
+
+.scene-hood i { right: 17%; }
+.scene-hood b { right: 8%; }
+
+.scene-open-shelves {
+  top: 15%;
+  left: 47%;
+  width: 16.5%;
+  height: 20%;
+  border-top: 3px solid #d5aa80;
+  border-bottom: 3px solid #d5aa80;
+}
+
+.scene-open-shelves::after {
+  top: 52%;
+  right: 0;
+  left: 0;
+  height: 3px;
+  content: "";
+  background: #d5aa80;
+}
+
+.shelf-plate {
+  width: 26%;
+  height: 8%;
+  border-radius: 50%;
+  background: #c9d4bd;
+}
+
+.shelf-plate-a { top: 16%; left: 18%; }
+.shelf-plate-b { top: 24%; left: 25%; }
+.shelf-jar {
+  bottom: 8%;
+  width: 19%;
+  height: 30%;
+  border-top: 5px solid #f0e6d3;
+  background: #7d9aaa;
+}
+.jar-a { left: 8%; }
+.jar-b { left: 39%; }
+.jar-c { right: 7%; }
+
+.scene-wall-cabinets {
+  top: 10%;
+  right: 5.2%;
+  width: 31%;
+  height: 25%;
+  background: var(--scene-cabinet);
+  box-shadow: inset 0 0 0 2px rgba(187, 148, 119, 0.35);
+}
+
+.scene-wall-cabinets i {
+  top: 0;
+  height: 100%;
+  width: 33.333%;
+  border-right: 2px solid rgba(187, 148, 119, 0.45);
+}
+
+.scene-wall-cabinets i:nth-child(1) { left: 0; }
+.scene-wall-cabinets i:nth-child(2) { left: 33.333%; }
+.scene-wall-cabinets i:nth-child(3) { right: 0; border-right: 0; }
+
+.scene-wall-cabinets i::after {
+  top: 43%;
+  right: 12%;
+  width: 7%;
+  height: 22%;
+  content: "";
+  background: var(--scene-handle);
+}
+
+.scene-utensils {
+  bottom: 50.3%;
+  left: 48%;
+  width: 17%;
+  height: 10%;
+  border-top: 3px solid #b7835a;
+}
+
+.scene-utensils i {
+  top: 15%;
+  width: 4%;
+  height: 57%;
+  border-radius: 0 0 50% 50%;
+  background: #c28e34;
+}
+.scene-utensils i:nth-child(1) { left: 40%; }
+.scene-utensils i:nth-child(2) { left: 53%; }
+.scene-utensils b { top: 20%; left: 73%; width: 14%; aspect-ratio: 1; background: #d4a43b; transform: rotate(45deg); }
+
+.scene-plant {
+  right: 31%;
+  bottom: 50%;
+  width: 6%;
+  height: 10%;
+  border-radius: 0 0 38% 38%;
+  background: #98a780;
+}
+.scene-plant i { bottom: 62%; left: 12%; width: 34%; height: 60%; border-radius: 80% 0 80% 0; background: #54744d; transform: rotate(-30deg); }
+.scene-plant b { bottom: 62%; right: 12%; width: 34%; height: 60%; border-radius: 0 80% 0 80%; background: #54744d; transform: rotate(30deg); }
+
+.scene-mixer {
+  right: 7.3%;
+  bottom: 50%;
+  width: 11%;
+  height: 17%;
+  background: #e5a22c;
+}
+.scene-mixer::before { top: 16%; left: -4%; width: 86%; height: 12%; content: ""; background: #e5a22c; }
+.scene-mixer i { right: 17%; bottom: 5%; width: 38%; height: 40%; border-radius: 0 0 45% 45%; background: #e6e6dd; }
+.scene-mixer b { right: 9%; bottom: 13%; width: 8%; aspect-ratio: 1; border-radius: 50%; background: #eee8d5; }
+
+@media (max-width: 760px) {
+  .recipe-kitchen-scene {
+    min-width: 760px;
+    transform: translateX(calc(50vw - 380px));
+  }
+}
+
+/* Full kitchen environment with a separately interactive refrigerator. */
+.recipe-kitchen-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #f3e6d3 url("/recipe-dashboard-kitchen.png") center / cover no-repeat;
+  transform: none;
+}
+
+.dashboard-fridge {
+  position: absolute;
+  top: 18.1%;
+  left: 41.4%;
+  width: 24.7%;
+  height: 63.7%;
+  pointer-events: auto;
+  perspective: 1200px;
+}
+
+.dashboard-fridge-door {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  cursor: pointer;
+  border: 3px solid #704a2a;
+  border-radius: 30px 30px 14px 14px;
+  background:
+    radial-gradient(circle at 20% 13%, rgba(255, 255, 255, 0.72), transparent 22%),
+    linear-gradient(112deg, rgba(255, 255, 255, 0.32), transparent 39%),
+    #f7d99a;
+  box-shadow: inset -11px 0 0 rgba(137, 89, 47, 0.14), 5px 6px 0 rgba(84, 53, 33, 0.14);
+  transform-origin: left center;
+  transition: transform 650ms cubic-bezier(0.2, 0.75, 0.2, 1), filter 220ms ease;
+}
+
+.dashboard-fridge-door:hover {
+  filter: brightness(1.045);
+}
+
+.dashboard-fridge-top-door {
+  top: 0;
+  height: 44.5%;
+}
+
+.dashboard-fridge-bottom-door {
+  bottom: 0;
+  height: 55.5%;
+  border-radius: 15px 15px 30px 30px;
+}
+
+.dashboard-fridge-top-open .dashboard-fridge-top-door,
+.dashboard-fridge-bottom-open .dashboard-fridge-bottom-door {
+  transform: rotateY(-63deg);
+}
+
+.dashboard-fridge-handle {
+  position: absolute;
+  top: 29%;
+  left: 7%;
+  width: 6%;
+  height: 43%;
+  border: 2px solid #4b3d32;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #dfe2db, #73827c 44%, #eff0e7);
+}
+
+.dashboard-fridge-magnet {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 17%;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid #73503a;
+  border-radius: 50%;
+  box-shadow: 2px 3px 0 rgba(75, 52, 34, 0.25);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.dashboard-fridge-magnet:hover,
+.dashboard-fridge-magnet.is-active {
+  box-shadow: 0 0 0 4px rgba(255, 248, 211, 0.7), 2px 3px 0 rgba(75, 52, 34, 0.25);
+  transform: translateY(-3px) rotate(7deg);
+}
+
+.fridge-magnet-bus { top: 16%; left: 21%; background: #97d9bf; }
+.fridge-magnet-car { top: 32%; right: 20%; background: #b3dcee; }
+.fridge-magnet-cat { bottom: 28%; left: 24%; background: #f7b17e; }
+.fridge-magnet-leaf { right: 19%; bottom: 16%; background: #bfe582; }
+
+.fridge-magnet-bus::before,
+.fridge-magnet-car::before,
+.fridge-magnet-cat::before,
+.fridge-magnet-leaf::before {
+  color: #216254;
+  font-size: clamp(0.45rem, 1.1vw, 1rem);
+  font-weight: 900;
+}
+
+.fridge-magnet-bus::before { content: "▣"; }
+.fridge-magnet-car::before { content: "▰"; color: #2871a6; }
+.fridge-magnet-cat::before { content: "⌂"; color: #d76539; }
+.fridge-magnet-leaf::before { content: "♣"; color: #438341; }
+
+@media (max-aspect-ratio: 3/2) {
+  .dashboard-fridge {
+    left: 42.8%;
+    width: 20.8%;
+  }
+}
+
+@media (max-width: 760px) {
+  .recipe-kitchen-scene {
+    min-width: 0;
+    transform: none;
+  }
+
+  .dashboard-fridge {
+    left: 36%;
+    width: 30%;
+  }
+}
+
+/* Minimal recipe workspace: open left side, oven, and interactive yellow fridge. */
+.recipe-kitchen-scene {
+  min-width: 0;
+  background: #2a835f;
+}
+
+.dashboard-fridge {
+  top: 11%;
+  right: 6%;
+  left: auto;
+  width: clamp(180px, 20vw, 310px);
+  height: clamp(390px, 66vh, 620px);
+}
+
+.dashboard-fridge-door {
+  border: 4px solid #7a581b;
+  background:
+    radial-gradient(circle at 22% 14%, rgba(255, 255, 255, 0.68), transparent 21%),
+    linear-gradient(112deg, rgba(255, 255, 255, 0.38), transparent 40%),
+    #f8de22;
+  box-shadow: inset -13px 0 0 rgba(163, 119, 10, 0.15), 6px 8px 0 rgba(19, 78, 55, 0.35);
+}
+
+.dashboard-fridge-bottom-door {
+  background:
+    radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.58), transparent 20%),
+    linear-gradient(112deg, rgba(255, 255, 255, 0.27), transparent 40%),
+    #efd218;
+}
+
+.dashboard-fridge-handle {
+  background: linear-gradient(90deg, #d8eef0, #65b7c8 45%, #effafa);
+}
+
+.dashboard-oven {
+  position: absolute;
+  right: clamp(225px, 27vw, 405px);
+  bottom: 10%;
+  width: clamp(150px, 16vw, 255px);
+  height: clamp(230px, 39vh, 360px);
+  border: 4px solid #523a2a;
+  border-radius: 12px 12px 7px 7px;
+  background: #f7f0da;
+  box-shadow: 7px 9px 0 rgba(19, 78, 55, 0.32);
+}
+
+.dashboard-oven-top {
+  top: -12%;
+  right: -5%;
+  left: -5%;
+  height: 13%;
+  border: 4px solid #523a2a;
+  border-radius: 50% 50% 10px 10px;
+  background: #354d50;
+}
+
+.dashboard-oven-top i {
+  bottom: 26%;
+  width: 16%;
+  aspect-ratio: 1;
+  border: 3px solid #1d3033;
+  border-radius: 50%;
+  background: #73989a;
+}
+
+.dashboard-oven-top i:nth-child(1) { left: 9%; }
+.dashboard-oven-top i:nth-child(2) { left: 30%; }
+.dashboard-oven-top i:nth-child(3) { right: 30%; }
+.dashboard-oven-top i:nth-child(4) { right: 9%; }
+
+.dashboard-oven-control-bar {
+  top: 6%;
+  right: 8%;
+  left: 8%;
+  height: 14%;
+}
+
+.dashboard-oven-control-bar i {
+  top: 0;
+  width: 15%;
+  aspect-ratio: 1;
+  border: 3px solid #493a2d;
+  border-radius: 50%;
+  background: #d5d2c4;
+}
+.dashboard-oven-control-bar i:nth-child(1) { left: 0; }
+.dashboard-oven-control-bar i:nth-child(2) { left: 28%; }
+.dashboard-oven-control-bar i:nth-child(3) { right: 28%; }
+.dashboard-oven-control-bar i:nth-child(4) { right: 0; }
+
+.dashboard-oven-window {
+  right: 11%;
+  bottom: 10%;
+  left: 11%;
+  height: 60%;
+  overflow: hidden;
+  border: 5px solid #554534;
+  border-radius: 8px;
+  background: linear-gradient(125deg, #3b4c4b 0 38%, #596b67 39% 50%, #2a3837 51%);
+}
+
+.dashboard-oven-window i {
+  right: 0;
+  bottom: 29%;
+  left: 0;
+  height: 4px;
+  background: rgba(240, 232, 203, 0.36);
+}
+
+@media (max-width: 760px) {
+  .dashboard-fridge {
+    right: 4%;
+    left: auto;
+    width: 37vw;
+    height: 64vh;
+  }
+
+  .dashboard-oven {
+    right: 39vw;
+    width: 27vw;
+    height: 34vh;
+  }
+}
+
+/* Quiet kitchen line art behind the future recipe interface. */
+.recipe-kitchen-scene {
+  position: absolute;
+  inset: 0;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #2a835f;
+}
+
+.kitchen-icon-pattern {
+  width: 100%;
+  height: 100%;
+  opacity: 0.24;
+}
+
+.kitchen-icon-strokes {
+  fill: none;
+  stroke: #eff9e4;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.recipe-screen-chef {
+  position: absolute;
+  right: clamp(24px, 5vw, 92px);
+  top: 50%;
+  z-index: 1;
+  width: min(37vw, 470px);
+  max-height: 84vh;
+  object-fit: contain;
+  transform: translateY(-50%);
+  filter: drop-shadow(12px 16px 0 rgba(20, 83, 60, 0.2));
+}
+
+.chef-vector .chef-leg,
+.chef-vector .chef-shoe {
+  fill: #4c4e59;
+}
+
+.chef-vector .chef-coat,
+.chef-vector .chef-arm,
+.chef-vector .chef-neck,
+.chef-vector .chef-hat,
+.chef-vector .chef-hat-band {
+  fill: #edf8fa;
+}
+
+.chef-vector .chef-coat-line {
+  fill: none;
+}
+
+.chef-vector .chef-head,
+.chef-vector .chef-ear,
+.chef-vector .chef-hand,
+.chef-vector .chef-nose {
+  fill: #ffbd87;
+}
+
+.chef-vector .chef-hair,
+.chef-vector .chef-moustache {
+  fill: #73422d;
+}
+
+.chef-vector .chef-eye {
+  fill: #fffdf5;
+}
+
+.chef-vector .chef-pupil {
+  fill: #2f2520;
+}
+
+.chef-vector .chef-brow {
+  fill: none;
+}
+
+.chef-vector .chef-smile {
+  fill: #fffdf5;
+}
+
+.chef-vector .chef-scarf,
+.chef-vector .chef-scarf-knot {
+  fill: #ed3a35;
+}
+
+.chef-vector .chef-button {
+  fill: #97a0b8;
+}
+
+@media (max-width: 760px) {
+  .recipe-screen-chef {
+    right: 4vw;
+    width: min(60vw, 350px);
+    max-height: 66vh;
+  }
 }
 
 .hero,
@@ -77,13 +1201,15 @@ button {
 
 .hero {
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: #305f4b;
+  color: #fff9df;
   font-weight: 700;
   letter-spacing: -0.03em;
 }
@@ -94,9 +1220,9 @@ button {
   height: 36px;
   place-items: center;
   color: #fff;
-  background: #dc684c;
+  background: #f37d61;
   border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(184, 72, 48, 0.22);
+  box-shadow: 0 8px 18px rgba(23, 81, 56, 0.28);
 }
 
 .hero-copy {
@@ -111,7 +1237,7 @@ button {
   justify-content: center;
   gap: 7px;
   margin: 0 0 12px;
-  color: #a8583f;
+  color: #ffe29b;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -125,7 +1251,7 @@ button {
 .loading-state h2,
 .error-state h2 {
   font-family: "Fraunces", Georgia, serif;
-  color: #20322d;
+  color: #fff9df;
 }
 
 .hero h1 {
@@ -139,7 +1265,7 @@ button {
 .hero-copy > p:last-child {
   max-width: 560px;
   margin: 22px auto 0;
-  color: #64736d;
+  color: #d8efdf;
   font-size: 1.05rem;
   line-height: 1.65;
 }
@@ -152,8 +1278,8 @@ button {
   margin: 38px auto 0;
   padding: 12px;
   text-align: left;
-  background: rgba(255, 253, 247, 0.84);
-  border: 1px solid rgba(51, 87, 69, 0.12);
+  background: rgba(255, 252, 236, 0.93);
+  border: 2px solid rgba(111, 76, 37, 0.3);
   border-radius: 24px;
   box-shadow: 0 22px 50px rgba(64, 65, 47, 0.12);
   backdrop-filter: blur(14px);
@@ -215,12 +1341,14 @@ button {
   padding: 38px;
   text-align: center;
   border-radius: 28px;
+  position: relative;
+  z-index: 1;
 }
 
 .empty-state,
 .loading-state {
-  background: rgba(255, 253, 247, 0.56);
-  border: 1px dashed rgba(58, 94, 76, 0.25);
+  background: rgba(255, 252, 236, 0.9);
+  border: 2px dashed rgba(99, 70, 33, 0.35);
 }
 
 .empty-state svg {
@@ -283,6 +1411,8 @@ button {
 
 .recipe-dashboard {
   margin-top: 58px;
+  position: relative;
+  z-index: 1;
 }
 
 .recipe-intro {
@@ -1858,7 +2988,7 @@ button {
 
 .intro-title-row-fridge,
 .intro-title-row-recipe {
-  color: #00E0BA;
+  color: #7AE2CF;
   text-shadow: 0 5px 0 #f8de22, 0 0 18px rgba(248, 222, 34, 0.38), 0 18px 28px rgba(18, 84, 79, 0.22);
 }
 

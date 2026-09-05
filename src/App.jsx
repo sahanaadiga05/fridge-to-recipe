@@ -1,14 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  ChefHat,
-  CircleAlert,
-  Sparkles,
-  UtensilsCrossed,
-} from "lucide-react";
-import IngredientInput from "./components/IngredientInput";
-import RecipeDashboard from "./components/RecipeDashboard";
 import LandingPage from "./components/LandingPage";
+import RecipeKitchenScene from "./components/RecipeKitchenScene";
 import "./index.css";
 
 
@@ -117,104 +109,7 @@ function App() {
 
   return (
     <main className="app-shell">
-      <div className="ambient-orb orb-one" />
-      <div className="ambient-orb orb-two" />
-
-      <section className="hero">
-        <motion.div
-          className="brand"
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="brand-icon">
-            <ChefHat size={21} />
-          </span>
-          Fridge to Recipe
-        </motion.div>
-
-        <motion.div
-          className="hero-copy"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.12 }}
-        >
-          <p className="eyebrow">
-            <Sparkles size={15} />
-            Your fridge, reimagined
-          </p>
-          <h1>Turn leftovers into something worth making.</h1>
-          <p>
-            Tell us what is waiting in your fridge. We will shape it into a
-            simple, flexible recipe.
-          </p>
-        </motion.div>
-
-        <IngredientInput
-          value={ingredientsInput}
-          onChange={setIngredientsInput}
-          onSubmit={generateRecipe}
-          isLoading={isLoading}
-        />
-      </section>
-
-      <AnimatePresence mode="wait">
-        {!recipe && !isLoading && !error && (
-          <motion.section
-            className="empty-state"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <UtensilsCrossed size={34} />
-            <h2>Your recipe will appear here.</h2>
-            <p>Start with a few ingredients. Imperfect lists are welcome.</p>
-          </motion.section>
-        )}
-
-        {isLoading && (
-          <motion.section
-            className="loading-state"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="loading-pan">
-              <ChefHat size={38} />
-            </div>
-            <h2>Creating your recipe...</h2>
-            <p>Matching ingredients, balancing flavours, and setting the table.</p>
-          </motion.section>
-        )}
-
-        {error && !isLoading && (
-          <motion.section
-            className="error-state"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <CircleAlert size={34} />
-            <h2>Recipe kitchen is taking a break.</h2>
-            <p>{error}</p>
-            <button type="button" onClick={generateRecipe}>
-              Try again
-            </button>
-          </motion.section>
-        )}
-
-        {recipe && !isLoading && (
-          <RecipeDashboard
-            recipe={recipe}
-            servings={servings}
-            onServingsChange={setServings}
-            completedSteps={completedSteps}
-            onToggleStep={toggleStep}
-            swappedIngredients={swappedIngredients}
-            openSwap={openSwap}
-            onOpenSwap={setOpenSwap}
-            onChooseSwap={chooseSwap}
-          />
-        )}
-      </AnimatePresence>
+      <RecipeKitchenScene />
     </main>
   );
 }

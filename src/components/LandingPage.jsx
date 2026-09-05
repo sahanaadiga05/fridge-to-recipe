@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, BusFront, CarTaxiFront, Cat, Rabbit } from "lucide-react";
 
 const titleRows = [
-  { text: "FRiDGe", className: "intro-title-row-fridge", delay: 2.05 },
+  { text: "FriDGe", className: "intro-title-row-fridge", delay: 2.05 },
   { text: "to", className: "intro-title-row-to", delay: 2.95 },
   { text: "rECiPe", className: "intro-title-row-recipe", delay: 3.35 },
 ];
