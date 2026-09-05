@@ -1,64 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Apple, ArrowRight, BusFront, CarTaxiFront, Carrot, Cat, Cherry, Citrus, CookingPot, Drumstick, Egg, EggFried, Fish, Milk, Pizza, Rabbit, Salad, Sandwich, Soup, Wheat } from "lucide-react";
+import { ArrowRight, BusFront, CarTaxiFront, Cat, Rabbit } from "lucide-react";
 
 const titleRows = [
   { text: "FRIDGE", className: "intro-title-row-fridge", delay: 2.05 },
   { text: "to", className: "intro-title-row-to", delay: 2.95 },
   { text: "RECIPE", className: "intro-title-row-recipe", delay: 3.35 },
 ];
-const foodIcons = [
-  { Icon: Drumstick, color: "#de663d" },
-  { Icon: Fish, color: "#79a6c8" },
-  { Icon: Pizza, color: "#ecbd45" },
-  { Icon: Milk, color: "#92bdca" },
-  { Icon: Egg, color: "#e7bd4e" },
-  { Icon: Pizza, color: "#dc7750" },
-  { Icon: Wheat, color: "#dbab3e" },
-  { Icon: Salad, color: "#65ad61" },
-  { Icon: Carrot, color: "#df6c3f" },
-  { Icon: Apple, color: "#d8564d" },
-  { Icon: Cherry, color: "#b95368" },
-  { Icon: Citrus, color: "#d8b841" },
-  { Icon: Sandwich, color: "#c78f43" },
-  { Icon: Soup, color: "#729fc5" },
-  { Icon: CookingPot, color: "#566d74" },
-  { Icon: EggFried, color: "#e8ba45" },
-];
-
-function FoodOrbit({ isOrbiting, isLeaving }) {
-  return (
-    <div className={`food-orbit${!isOrbiting ? " food-orbit-paused" : ""}${isLeaving ? " food-orbit-leaving" : ""}`} aria-hidden="true">
-      {foodIcons.map(({ Icon, color }, index) => {
-        const startAngle = index * (360 / foodIcons.length);
-        const pauseAngle = startAngle + (1 / 22) * 360;
-
-        return (
-          <span
-            className="food-orbit-item"
-            key={`${Icon.displayName || Icon.name}-${index}`}
-            style={{
-              "--start-angle": `${startAngle}deg`,
-              "--counter-angle": `${-startAngle}deg`,
-              "--end-angle": `${startAngle + 360}deg`,
-              "--end-counter-angle": `${-startAngle - 360}deg`,
-              "--pause-angle": `${pauseAngle}deg`,
-              "--pause-counter-angle": `${-pauseAngle}deg`,
-              "--orbit-radius": "clamp(225px, 25vw, 390px)",
-              "--orbit-duration": "22s",
-              "--exit-delay": `${index * 55}ms`,
-              "--line-offset": `${index * 28}px`,
-              "--food-color": color,
-            }}
-          >
-            <Icon aria-hidden="true" />
-          </span>
-        );
-      })}
-    </div>
-  );
-}
-
 function FallingTitle({ shouldReduceMotion }) {
   return (
     <h1 className="intro-title" aria-label="FRIDGE to RECIPE">
@@ -113,10 +61,7 @@ function FallingTitle({ shouldReduceMotion }) {
 function FridgeIntro({ isOpening, onOpen }) {
   return (
     <section className={`fridge-intro${isOpening ? " fridge-intro-opening" : ""}`} aria-label="Open the fridge to begin">
-      <div className="fridge-intro-copy" aria-hidden="true">
-        <span>OPEN THE FRIDGE</span>
-        <p>Your next recipe is waiting inside.</p>
-      </div>
+      <div className="fridge-kitchen-decor" aria-hidden="true" />
 
       <div className="fridge-unit">
         <div className="fridge-cavity" aria-hidden="true">
@@ -127,42 +72,25 @@ function FridgeIntro({ isOpening, onOpen }) {
 
         <button
           type="button"
-          className="fridge-door fridge-door-top fridge-door-left"
+          className="fridge-door fridge-door-top"
           onClick={onOpen}
           disabled={isOpening}
-          aria-label="Open both upper fridge doors"
+          aria-label="Open the top fridge door"
         >
           <span className="fridge-door-shine" />
-          <span className="fridge-magnet fridge-magnet-bus" aria-hidden="true"><BusFront /></span>
-          <span className="fridge-magnet fridge-magnet-cat" aria-hidden="true"><Cat /></span>
+          <span className="fridge-tap-hint fridge-tap-hint-single" aria-hidden="true">Tap this<br />door</span>
+          <span className="fridge-magnet fridge-magnet-eiffel" aria-hidden="true"><img src="/eiffel-tower-magnet.png" alt="" /></span>
           <span className="fridge-handle" />
         </button>
 
-        <button
-          type="button"
-          className="fridge-door fridge-door-top fridge-door-right"
-          onClick={onOpen}
-          disabled={isOpening}
-          aria-label="Open both upper fridge doors"
-        >
+        <div className="fridge-door fridge-door-bottom" aria-hidden="true">
           <span className="fridge-door-shine" />
-          <span className="fridge-magnet fridge-magnet-taxi" aria-hidden="true"><CarTaxiFront /></span>
-          <span className="fridge-magnet fridge-magnet-rabbit" aria-hidden="true"><Rabbit /></span>
-          <span className="fridge-handle" />
-        </button>
-
-        <div className="fridge-door fridge-door-bottom fridge-door-left" aria-hidden="true">
-          <span className="fridge-door-shine" />
+          <span className="fridge-magnet fridge-magnet-bus"><BusFront /></span>
+          <span className="fridge-magnet fridge-magnet-cat"><Cat /></span>
+          <span className="fridge-magnet fridge-magnet-taxi"><CarTaxiFront /></span>
+          <span className="fridge-magnet fridge-magnet-rabbit"><Rabbit /></span>
           <span className="fridge-handle" />
         </div>
-
-        <div className="fridge-door fridge-door-bottom fridge-door-right" aria-hidden="true">
-          <span className="fridge-door-shine" />
-          <span className="fridge-handle" />
-        </div>
-
-        <span className="fridge-tap-hint fridge-tap-hint-left" aria-hidden="true">Tap the</span>
-        <span className="fridge-tap-hint fridge-tap-hint-right" aria-hidden="true">top door</span>
       </div>
     </section>
   );
@@ -173,36 +101,6 @@ function LandingPage({ onGetStarted }) {
   const shouldReduceMotion = useReducedMotion();
   const [showHero, setShowHero] = useState(false);
   const [isFridgeOpening, setIsFridgeOpening] = useState(false);
-  const [isOrbiting, setIsOrbiting] = useState(!shouldReduceMotion);
-  const [isEmojiLeaving, setIsEmojiLeaving] = useState(shouldReduceMotion);
-  const [showChefWater, setShowChefWater] = useState(shouldReduceMotion);
-
-  useEffect(() => {
-    if (!showHero) {
-      return undefined;
-    }
-
-    if (shouldReduceMotion) {
-      setIsOrbiting(false);
-      setIsEmojiLeaving(true);
-      setShowChefWater(true);
-      return undefined;
-    }
-
-    setIsOrbiting(true);
-    setIsEmojiLeaving(false);
-    setShowChefWater(false);
-
-    const revealTimer = window.setTimeout(() => {
-      setIsOrbiting(false);
-      setIsEmojiLeaving(true);
-      setShowChefWater(true);
-    }, 1000);
-
-    return () => {
-      window.clearTimeout(revealTimer);
-    };
-  }, [shouldReduceMotion, showHero]);
 
   const handleFridgeOpen = () => {
     if (isFridgeOpening) {
@@ -212,7 +110,7 @@ function LandingPage({ onGetStarted }) {
     setIsFridgeOpening(true);
     window.setTimeout(() => {
       setShowHero(true);
-    }, shouldReduceMotion ? 0 : 1000);
+    }, shouldReduceMotion ? 0 : 1300);
   };
 
   const handleGetStarted = () => {
@@ -231,7 +129,7 @@ function LandingPage({ onGetStarted }) {
 
       {showHero && <section className="intro-layout" aria-label="Fridge to Recipe introduction">
         <div className="cartoon-scene-stage">
-          <svg className={`chef-water-backdrop${showChefWater ? " chef-water-backdrop-visible" : ""}`} viewBox="0 0 600 850" aria-hidden="true">
+          <svg className="chef-water-backdrop chef-water-backdrop-visible" viewBox="0 0 600 850" aria-hidden="true">
             <defs>
               <path id="chef-water-shape" d="M132 16 C232 -12 275 52 211 88 C151 122 91 86 81 160 C69 243 183 218 184 289 C185 362 55 354 61 440 C67 521 194 493 184 580 C174 667 66 643 92 727 C116 806 225 762 274 807 C321 850 384 779 447 808 C519 841 584 781 540 714 C505 663 429 677 447 599 C466 518 587 532 570 447 C554 368 432 381 447 295 C461 217 582 219 544 143 C508 72 426 116 377 67 C323 13 227 65 132 16 Z" />
               <mask id="chef-water-dash-mask" x="-20%" y="-20%" width="140%" height="140%">
@@ -249,7 +147,6 @@ function LandingPage({ onGetStarted }) {
             <path className="water-squiggle" d="M478 309 C450 322 461 343 481 339 C501 335 494 361 473 366" />
             <path className="water-squiggle water-squiggle-low" d="M143 412 C118 425 132 445 150 440 C169 435 164 458 143 463" />
           </svg>
-          {!shouldReduceMotion && <FoodOrbit isOrbiting={isOrbiting} isLeaving={isEmojiLeaving} />}
           <img
             className="static-chef-image"
             src="/chef-reference.png"
