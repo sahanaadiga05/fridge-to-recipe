@@ -11,13 +11,17 @@ function IngredientInput({value, onChange, onSubmit, isLoading}){
             transition={{ dration: 0.55, delay: 0.24}}
         >
             <label htmlFor = "ingredients">What do you have?</label>
+            <svg className="ingredient-hanger" viewBox="0 0 360 80" aria-hidden="true">
+                <circle cx="180" cy="12" r="7" />
+                <path d="M180 20L12 74M180 20l168 54" />
+            </svg>
 
             <textarea
                 id="ingredients"
                 value={value}
                 onChange={(event) => onChange(event.target.value)}
                 placeholder="eggs, rice, tomato, onion, cheese...."
-                rows="3"
+                rows="1"
             />
 
             <button type="submit" disabled={isLoading}>

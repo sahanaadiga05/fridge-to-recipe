@@ -1,3 +1,5 @@
+import IngredientInput from "./IngredientInput";
+
 const icons = [
   ["pot", 42, 58], ["pan", 168, 52], ["kettle", 292, 57], ["cup", 421, 50], ["mixer", 546, 47], ["knife", 690, 51], ["utensils", 811, 47],
   ["cup", 94, 184], ["kettle", 217, 183], ["pot", 342, 188], ["pan", 482, 180], ["mixer", 625, 176], ["utensils", 753, 181], ["knife", 890, 177],
@@ -6,9 +8,9 @@ const icons = [
   ["utensils", 37, 566], ["kettle", 177, 568], ["mixer", 315, 560], ["knife", 457, 569], ["cup", 580, 563], ["toaster", 716, 563], ["pot", 856, 564],
 ];
 
-function RecipeKitchenScene() {
+function RecipeKitchenScene({ value, onChange, onSubmit, isLoading }) {
   return (
-    <div className="recipe-kitchen-scene" aria-hidden="true">
+    <section className="recipe-kitchen-scene" aria-label="Recipe kitchen">
       <svg className="kitchen-icon-pattern" viewBox="0 0 1000 680" preserveAspectRatio="xMidYMid slice">
         <defs>
           <symbol id="pot" viewBox="0 0 80 80"><path d="M16 29h48v33H16zM11 34h5v18h-5M64 34h5v18h-5M24 22h32M31 15h18" /></symbol>
@@ -27,8 +29,14 @@ function RecipeKitchenScene() {
           ))}
         </g>
       </svg>
-      <img className="recipe-screen-chef" src="/recipe-chef-trimmed.png" alt="" />
-    </div>
+      <h1 className="recipe-welcome-title">Let&apos;s Cook Something Amazing</h1>
+      <IngredientInput
+        value={value}
+        onChange={onChange}
+        onSubmit={onSubmit}
+        isLoading={isLoading}
+      />
+    </section>
   );
 }
 

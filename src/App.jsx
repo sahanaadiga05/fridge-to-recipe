@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import LandingPage from "./components/LandingPage";
+import IngredientInput from "./components/IngredientInput";
 import RecipeKitchenScene from "./components/RecipeKitchenScene";
+import RecipeDashboard from "./components/RecipeDashboard";
 import "./index.css";
 
 
@@ -109,7 +111,41 @@ function App() {
 
   return (
     <main className="app-shell">
-      <RecipeKitchenScene />
+      <RecipeKitchenScene
+        value={ingredientsInput}
+        onChange={setIngredientsInput}
+        onSubmit={generateRecipe}
+        isLoading={isLoading}
+      />
+      <section className="recipe-results-layer" aria-live="polite">
+        {isLoading && (
+          <div className="recipe-status-card">
+            <span className="recipe-status-spinner" />
+            <p>Creating your recipe from the ingredients you shared...</p>
+          </div>
+        )}
+
+        {error && !isLoading && (
+          <div className="recipe-status-card recipe-status-error">
+            <p>{error}</p>
+            <button type="button" onClick={generateRecipe}>Try again</button>
+          </div>
+        )}
+
+        {recipe && !isLoading && (
+          <RecipeDashboard
+            recipe={recipe}
+            servings={servings}
+            onServingsChange={setServings}
+            completedSteps={completedSteps}
+            onToggleStep={toggleStep}
+            swappedIngredients={swappedIngredients}
+            openSwap={openSwap}
+            onOpenSwap={setOpenSwap}
+            onChooseSwap={chooseSwap}
+          />
+        )}
+      </section>
     </main>
   );
 }
