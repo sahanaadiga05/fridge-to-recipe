@@ -47,6 +47,11 @@ function RecipeDashboard({
     1360,
     460 + Math.max(recipe.ingredients.length * 94, displaySteps.length * 116)
   );
+  const mobileBoardHeight = Math.max(
+    2200,
+    680 + recipe.ingredients.length * 128 + displaySteps.length * 150,
+    measuredBoardHeight
+  );
   const boardHeight = Math.max(desktopBoardHeight, measuredBoardHeight);
   const boardBottomSpace = Math.max(
     170,
@@ -93,7 +98,7 @@ function RecipeDashboard({
       ref={boardRef}
       style={{
         "--recipe-board-min-height": `${boardHeight}px`,
-        "--recipe-board-mobile-min-height": `${boardHeight}px`,
+        "--recipe-board-mobile-min-height": `${mobileBoardHeight}px`,
         "--recipe-board-bottom-space": `${boardBottomSpace}px`,
       }}
       initial={{ opacity: 0, y: 30 }}

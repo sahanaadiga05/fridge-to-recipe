@@ -93,6 +93,10 @@ Create a production frontend build with:
 npm run build
 ```
 
+## Demo Video
+
+[Watch the Fridge to Recipe Demo](https://drive.google.com/file/d/13fbIwiWlf0YY8TpQuAjIoqgBajmYrssM/view?usp=drivesdk)
+
 ## Vercel Deployment
 
 The project includes a Vercel Function at `/api/generate-recipe`, so the deployed frontend and API run under the same domain.
