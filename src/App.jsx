@@ -56,7 +56,9 @@ function App() {
 
     try {
       const apiResponse = await fetch(
-        "http://localhost:3001/api/generate-recipe",
+        import.meta.env.DEV
+          ? "http://localhost:3001/api/generate-recipe"
+          : "/api/generate-recipe",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

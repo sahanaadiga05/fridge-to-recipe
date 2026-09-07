@@ -191,6 +191,10 @@ app.post("/api/generate-recipe", async(request, response) =>{
     }
 });
 
-app.listen(port, () =>{
-    console.log(`Recipe API running at http://localhost:${port}`);
-});
+if (!process.env.VERCEL) {
+    app.listen(port, () =>{
+        console.log(`Recipe API running at http://localhost:${port}`);
+    });
+}
+
+export default app;
