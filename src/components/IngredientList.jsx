@@ -39,7 +39,15 @@ function IngredientList({
     return Number.isInteger(scaledAmount) ? scaledAmount : scaledAmount.toFixed(1);
   };
 
-  const formatAmount = (amount) => (Number.isInteger(amount) ? amount : amount.toFixed(1));
+  const formatAmount = (amount) => {
+    const whole = Math.floor(amount);
+    const decimal = Math.round((amount - whole) * 100) / 100;
+    const fractions = { 0.25: "1/4", 0.5: "1/2", 0.75: "3/4" };
+    const fraction = fractions[decimal];
+
+    if (fraction) return whole ? `${whole} ${fraction}` : fraction;
+    return Number.isInteger(amount) ? amount : amount.toFixed(1);
+  };
 
   return (
     <article className="dashboard-card ingredinets-card">

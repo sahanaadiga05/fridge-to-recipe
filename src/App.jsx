@@ -52,7 +52,7 @@ function App() {
     setIngredientAmountOverrides({});
     setOpenSwap(null);
 
-    const timeoutId = window.setTimeout(() => controller.abort(), 8000);
+    const timeoutId = window.setTimeout(() => controller.abort(), 16000);
 
     try {
       const apiResponse = await fetch(

@@ -1124,7 +1124,7 @@ button {
   width: max-content;
   max-width: calc(100vw - 24px);
   margin: 0;
-  color: #00FFCA;
+  color: #344D67;
   font-family: "Coffee Normal", "Chewy", "Kalam", cursive;
   font-size: clamp(1rem, 5.8vw, 6.5rem);
   font-weight: 400;
@@ -1132,7 +1132,7 @@ button {
   letter-spacing: 0.02em;
   text-align: center;
   white-space: nowrap;
-  text-shadow: 4px 5px 0 rgba(16, 76, 55, 0.22);
+  text-shadow: 4px 5px 0 #fff449;
   animation: kitchen-title-enter 760ms cubic-bezier(0.2, 0.85, 0.25, 1) both, kitchen-title-float 3.8s ease-in-out 900ms infinite;
   transform: translateX(-50%);
 }
@@ -1151,7 +1151,7 @@ button {
   pointer-events: auto;
   border: 3px solid #70482a;
   border-radius: 34px 41px 36px 39px;
-  background: #ffdc73;
+  background: #ffd51e;
   box-shadow: 5px 7px 0 rgba(20, 83, 60, 0.26);
   transform: none;
 }
@@ -1235,17 +1235,26 @@ button {
   margin-right: auto;
   margin-left: auto;
   margin-top: 0;
-  min-height: 1080px;
-  padding: clamp(62px, 7vw, 100px) clamp(42px, 6vw, 92px) clamp(118px, 13vw, 170px);
-  overflow: hidden;
-  background: url("/recipe-board-large.png") center / 100% 100% no-repeat;
+  min-height: var(--recipe-board-min-height, 1360px);
+  padding: clamp(125px, 10vw, 165px) clamp(42px, 6vw, 92px) var(--recipe-board-bottom-space, clamp(118px, 13vw, 170px));
+  overflow: visible;
+  background: transparent;
   border: 0;
   border-radius: 0;
   box-shadow: none;
 }
 
 .recipe-results-layer .recipe-dashboard::before {
-  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -6%;
+  z-index: 0;
+  display: block;
+  width: 112%;
+  content: "";
+  background: url("/recipe-board-large.png") center / 100% 100% no-repeat;
+  pointer-events: none;
 }
 
 .recipe-results-layer .recipe-dashboard > * {
@@ -1271,7 +1280,8 @@ button {
 .recipe-results-layer .recipe-intro h2 {
   max-width: 100%;
   overflow: visible;
-  color: #123f2d;
+  color: #A82323;
+  font-family: "Coffee Normal", "Comic Sans MS", cursive;
   font-size: clamp(2rem, 4.2vw, 4.15rem);
   line-height: 1.02;
   text-overflow: clip;
@@ -1303,6 +1313,10 @@ button {
   border-radius: 16px;
   background: rgba(255, 252, 238, 0.94);
   box-shadow: 0 4px 0 rgba(23, 81, 59, 0.16);
+}
+
+.recipe-results-layer .ingredient-list li:last-child {
+  border-bottom: 2px solid #17513b;
 }
 
 .ingredient-icon {
@@ -1391,7 +1405,7 @@ button {
 .recipe-results-layer .recipe-intro {
   align-items: center;
   gap: 28px;
-  margin-bottom: 28px;
+  margin-bottom: 82px;
 }
 
 .recipe-results-layer .recipe-intro .eyebrow {
@@ -1404,10 +1418,11 @@ button {
 }
 
 .recipe-results-layer .recipe-intro > div > p:last-child {
-  max-width: 720px;
+  max-width: 1180px;
   margin-top: 10px;
   font-weight: 600;
   line-height: 1.45;
+  white-space: normal;
 }
 
 .recipe-results-layer .recipe-meta {
@@ -1415,6 +1430,7 @@ button {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 10px;
+  transform: translateY(-46px);
 }
 
 .recipe-results-layer .recipe-meta span {
@@ -1439,6 +1455,7 @@ button {
   content: "";
   background: repeating-linear-gradient(to bottom, #17513b 0 6px, transparent 6px 15px);
   opacity: 0.82;
+  transform: translateX(-28px);
 }
 
 .recipe-results-layer .card-heading {
@@ -1446,7 +1463,7 @@ button {
 }
 
 .recipe-results-layer .dashboard-card h3 {
-  color: #123f2d;
+  color: #25671e;
   font-family: "Coffee Normal", "Comic Sans MS", cursive;
   font-size: clamp(1.8rem, 2.5vw, 2.5rem);
   line-height: 1;
@@ -1514,17 +1531,23 @@ button {
 }
 
 .recipe-results-layer .step-check {
-  width: 39px;
-  height: 39px;
-  color: #fffdf0;
-  background: #17513b;
-  border: 0;
+  width: 32px;
+  height: 32px;
+  color: #17513b;
+  background: #fffdf0;
+  border: 2px solid #17513b;
+  border-radius: 5px;
 }
 
 @media (max-width: 900px) {
   .recipe-results-layer .recipe-dashboard {
-    min-height: 0;
-    padding: 58px 34px 110px;
+    min-height: var(--recipe-board-mobile-min-height, 1360px);
+    padding: 100px 34px var(--recipe-board-bottom-space, 110px);
+  }
+
+  .recipe-results-layer .recipe-dashboard::before {
+    left: 0;
+    width: 100%;
   }
 
   .recipe-results-layer .recipe-intro {
@@ -1532,8 +1555,13 @@ button {
     flex-direction: column;
   }
 
+  .recipe-results-layer .recipe-intro > div > p:last-child {
+    white-space: normal;
+  }
+
   .recipe-results-layer .recipe-meta {
     justify-content: flex-start;
+    transform: none;
   }
 
   .recipe-results-layer .dashboard-grid {
@@ -1547,7 +1575,7 @@ button {
 
 @media (max-width: 600px) {
   .recipe-results-layer .recipe-dashboard {
-    padding: 46px 20px 82px;
+    padding: 82px 20px var(--recipe-board-bottom-space, 82px);
   }
 
   .recipe-results-layer .ingredient-list li {

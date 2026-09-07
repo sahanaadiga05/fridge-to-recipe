@@ -1,5 +1,6 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ChefHat, Clock3, Leaf } from "lucide-react";
+import { ChefHat } from "lucide-react";
 import IngredientList from "./IngredientList";
 import RecipeSteps from "./RecipeSteps";
 
@@ -38,29 +39,74 @@ function RecipeDashboard({
   onChooseSwap,
 }) {
   const displaySteps = applyIngredientSwaps(recipe.steps, swappedIngredients);
+  const boardRef = useRef(null);
+  const introRef = useRef(null);
+  const gridRef = useRef(null);
+  const [measuredBoardHeight, setMeasuredBoardHeight] = useState(0);
+  const desktopBoardHeight = Math.max(
+    1360,
+    460 + Math.max(recipe.ingredients.length * 94, displaySteps.length * 116)
+  );
+  const boardHeight = Math.max(desktopBoardHeight, measuredBoardHeight);
+  const boardBottomSpace = Math.max(
+    170,
+    170 + Math.max(0, recipe.ingredients.length - 8) * 80
+  );
+
+  useLayoutEffect(() => {
+    const board = boardRef.current;
+    const intro = introRef.current;
+    const grid = gridRef.current;
+
+    if (!board || !intro || !grid) return undefined;
+
+    const updateBoardHeight = () => {
+      const boardStyles = window.getComputedStyle(board);
+      const introStyles = window.getComputedStyle(intro);
+      const requiredHeight = Math.ceil(
+        parseFloat(boardStyles.paddingTop) +
+          intro.offsetHeight +
+          parseFloat(introStyles.marginBottom) +
+          grid.offsetHeight +
+          parseFloat(boardStyles.paddingBottom) +
+          42
+      );
+
+      setMeasuredBoardHeight((currentHeight) =>
+        Math.abs(currentHeight - requiredHeight) > 1
+          ? requiredHeight
+          : currentHeight
+      );
+    };
+
+    const observer = new ResizeObserver(updateBoardHeight);
+    observer.observe(intro);
+    observer.observe(grid);
+    updateBoardHeight();
+
+    return () => observer.disconnect();
+  }, [recipe.ingredients.length, displaySteps.length]);
 
   return (
     <motion.section
       className="recipe-dashboard"
+      ref={boardRef}
+      style={{
+        "--recipe-board-min-height": `${boardHeight}px`,
+        "--recipe-board-mobile-min-height": `${boardHeight}px`,
+        "--recipe-board-bottom-space": `${boardBottomSpace}px`,
+      }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <article className="recipe-intro">
+      <article ref={introRef} className="recipe-intro">
         <div>
-          <p className="eyebrow">
-            <Leaf size={15} />
-            Made from your kitchen
-          </p>
           <h2>{recipe.title}</h2>
           <p>{recipe.description}</p>
         </div>
 
         <div className="recipe-meta">
-          <span>
-            <Clock3 size={17} />
-            {recipe.time}
-          </span>
           <span>
             <ChefHat size={17} />
             {recipe.difficulty}
@@ -68,7 +114,7 @@ function RecipeDashboard({
         </div>
       </article>
 
-      <div className="dashboard-grid">
+      <div ref={gridRef} className="dashboard-grid">
         <IngredientList
           ingredients={recipe.ingredients}
           recipeServings={recipe.servings}
