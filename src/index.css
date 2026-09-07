@@ -4459,7 +4459,7 @@ button {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   /* Keep the phone intro focused on the interactive fridge only. */
   .fridge-kitchen-decor {
     background: #2a835f;
