@@ -88,6 +88,7 @@ function RecipeDashboard({
           onToggleStep={onToggleStep}
         />
       </div>
+
     </motion.section>
   );
 }
