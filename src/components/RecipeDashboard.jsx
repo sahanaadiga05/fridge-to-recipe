@@ -31,6 +31,8 @@ function RecipeDashboard({
   completedSteps,
   onToggleStep,
   swappedIngredients,
+  ingredientAmountOverrides,
+  onIngredientAmountChange,
   openSwap,
   onOpenSwap,
   onChooseSwap,
@@ -73,6 +75,8 @@ function RecipeDashboard({
           servings={servings}
           onServingsChange={onServingsChange}
           swappedIngredients={swappedIngredients}
+          ingredientAmountOverrides={ingredientAmountOverrides}
+          onIngredientAmountChange={onIngredientAmountChange}
           openSwap={openSwap}
           onOpenSwap={onOpenSwap}
           onChooseSwap={onChooseSwap}

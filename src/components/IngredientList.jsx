@@ -7,6 +7,8 @@ function IngredientList ({
     servings,
     onServingsChange,
     swappedIngredients,
+    ingredientAmountOverrides,
+    onIngredientAmountChange,
     openSwap,
     onOpenSwap,
     onChooseSwap,
@@ -17,6 +19,10 @@ function IngredientList ({
         return Number.isInteger(scaledAmount)
         ? scaledAmount: scaledAmount.toFixed(1);
     };
+
+    const formatAmount = (amount) => (
+        Number.isInteger(amount) ? amount : amount.toFixed(1)
+    );
 
     return (
         <article className = "dashboard-card ingredinets-card">
@@ -53,6 +59,8 @@ function IngredientList ({
                 {ingredients.map((ingredient) => {
                     const currentName = 
                         swappedIngredients[ingredient.name] || ingredient.name;
+                    const scaledAmount = Number(scaleIngredient(ingredient));
+                    const currentAmount = ingredientAmountOverrides[ingredient.name] ?? scaledAmount;
                     
                     return (
                         <li key = {ingredient.name} className = "ingredient-item">
@@ -103,10 +111,39 @@ function IngredientList ({
                                 )}
                             </div>
 
-                            <strong>
-                                {scaleIngredient(ingredient)}
-                                {ingredient.unit}
-                            </strong>
+                            <div className="ingredient-amount-control">
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        onIngredientAmountChange(
+                                            ingredient.name,
+                                            currentAmount,
+                                            -0.5
+                                        )
+                                    }
+                                    aria-label={`Decrease ${currentName}`}
+                                >
+                                    <Minus size={15} />
+                                </button>
+
+                                <strong>
+                                    {formatAmount(currentAmount)} {ingredient.unit}
+                                </strong>
+
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        onIngredientAmountChange(
+                                            ingredient.name,
+                                            currentAmount,
+                                            0.5
+                                        )
+                                    }
+                                    aria-label={`Increase ${currentName}`}
+                                >
+                                    <Plus size={15} />
+                                </button>
+                            </div>
                         </li>
                     );
                 })}

@@ -12,6 +12,7 @@ function App() {
   const [servings, setServings] = useState(2);
   const [completedSteps, setCompletedSteps] = useState([]);
   const [swappedIngredients, setSwappedIngredients] = useState({});
+  const [ingredientAmountOverrides, setIngredientAmountOverrides] = useState({});
   const [openSwap, setOpenSwap] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -48,6 +49,7 @@ function App() {
     setRecipe(null);
     setCompletedSteps([]);
     setSwappedIngredients({});
+    setIngredientAmountOverrides({});
     setOpenSwap(null);
 
     const timeoutId = window.setTimeout(() => controller.abort(), 8000);
@@ -109,6 +111,15 @@ function App() {
     setOpenSwap(null);
   };
 
+  const changeIngredientAmount = (ingredientName, currentAmount, change) => {
+    const nextAmount = Math.max(0.5, Number((currentAmount + change).toFixed(1)));
+
+    setIngredientAmountOverrides((current) => ({
+      ...current,
+      [ingredientName]: nextAmount,
+    }));
+  };
+
   return (
     <main className="app-shell">
       <RecipeKitchenScene
@@ -140,6 +151,8 @@ function App() {
             completedSteps={completedSteps}
             onToggleStep={toggleStep}
             swappedIngredients={swappedIngredients}
+            ingredientAmountOverrides={ingredientAmountOverrides}
+            onIngredientAmountChange={changeIngredientAmount}
             openSwap={openSwap}
             onOpenSwap={setOpenSwap}
             onChooseSwap={chooseSwap}

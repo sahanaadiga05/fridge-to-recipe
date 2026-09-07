@@ -39,7 +39,7 @@ button {
   overflow: hidden;
   padding: 42px 6vw 80px;
   color: #fff9df;
-  background: #2a835f;
+  background: #F65A83;
 }
 
 .recipe-kitchen-scene {
@@ -971,7 +971,7 @@ button {
 /* Minimal recipe workspace: open left side, oven, and interactive yellow fridge. */
 .recipe-kitchen-scene {
   min-width: 0;
-  background: #2a835f;
+  background: #F65A83;
 }
 
 .dashboard-fridge {
@@ -1099,7 +1099,7 @@ button {
   min-width: 0;
   overflow: hidden;
   pointer-events: none;
-  background: #2a835f;
+  background: #F65A83;
 }
 
 .kitchen-icon-pattern {
@@ -1235,6 +1235,16 @@ button {
   color: #20322d;
 }
 
+.recipe-results-layer .recipe-intro h2 {
+  max-width: 100%;
+  overflow: hidden;
+  color: #222;
+  font-size: clamp(1.9rem, 4.2vw, 4rem);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 2px 2px 0 #a8a8a8;
+}
+
 .recipe-results-layer .recipe-intro > div > p:last-child {
   color: #e8f7e8;
 }
@@ -1250,11 +1260,55 @@ button {
 }
 
 .recipe-results-layer .ingredient-list li {
-  min-height: 72px;
+  grid-template-columns: 10px 1fr;
+  min-height: 132px;
   padding: 13px;
   border: 1px solid rgba(48, 95, 75, 0.16);
   border-radius: 14px;
   background: #fffdf7;
+}
+
+.recipe-results-layer .ingredient-name {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.recipe-results-layer .ingredient-list strong {
+  color: #305f4b;
+}
+
+.recipe-results-layer .ingredient-dot {
+  margin-top: 12px;
+}
+
+.ingredient-amount-control {
+  grid-column: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: 2px;
+  padding: 4px;
+  background: #e8f0e5;
+  border-radius: 10px;
+}
+
+.ingredient-amount-control button {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  color: #fff;
+  background: #305f4b;
+  border: 0;
+  border-radius: 7px;
+}
+
+.ingredient-amount-control strong {
+  min-width: 64px;
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 .recipe-results-layer .servings-control {
