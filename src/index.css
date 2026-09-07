@@ -1124,7 +1124,7 @@ button {
   width: max-content;
   max-width: calc(100vw - 24px);
   margin: 0;
-  color: #ffff80;
+  color: #00FFCA;
   font-family: "Coffee Normal", "Chewy", "Kalam", cursive;
   font-size: clamp(1rem, 5.8vw, 6.5rem);
   font-weight: 400;
@@ -1587,6 +1587,37 @@ button {
   background: #fff9df;
   border: 3px solid #70482a;
   border-radius: 21px;
+}
+
+.recipe-empty-state {
+  width: min(540px, 90vw);
+  margin: 0 auto;
+  padding: 24px 28px;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.recipe-empty-state p {
+  display: block;
+  width: 100%;
+  margin: 0 0 7px;
+  color: #fff449;
+  font-family: "Coffee Normal", "Comic Sans MS", cursive;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 800;
+  text-align: center;
+  transform: translateX(-15%);
+  white-space: nowrap;
+}
+
+.recipe-empty-state span {
+  color: #fed24f;
+  font-size: clamp(0.9rem, 1.35vw, 1.1rem);
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .recipe-status-card p {

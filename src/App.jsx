@@ -129,6 +129,13 @@ function App() {
         isLoading={isLoading}
       />
       <section className="recipe-results-layer" aria-live="polite">
+        {!recipe && !isLoading && !error && (
+          <div className="recipe-empty-state">
+            <p>Your recipe will appear here.</p>
+            <span>Add your ingredients above, then click Create a recipe.</span>
+          </div>
+        )}
+
         {isLoading && (
           <div className="recipe-status-card">
             <span className="recipe-status-spinner" />
