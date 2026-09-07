@@ -1913,6 +1913,11 @@ button {
   min-width: 0;
 }
 
+.ingredient-name > span {
+  color: #1f2420;
+  font-weight: 600;
+}
+
 .ingredient-list strong {
   color: #305f4b;
 }

@@ -14,6 +14,8 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
 });
 
+const RESPONSE_LIMIT_MS = 7400;
+
 const recipeSchema = z.object({
     title: z.string().min(2),
     description: z.string().min(10),
@@ -75,6 +77,59 @@ const recipeJsonSchema = {
     ],
 };
 
+function parseRecipeOutput(output) {
+    const jsonText = output
+        .replace(/^```json\s*/i, "")
+        .replace(/\s*```$/, "")
+        .trim();
+
+    return recipeSchema.parse(JSON.parse(jsonText));
+}
+
+async function requestRecipeOutput(input) {
+    const result = await ai.interactions.create({
+        model: "gemini-3.5-flash-lite",
+        input,
+        response_format: {
+            type: "text",
+            mime_type: "application/json",
+            schema: recipeJsonSchema,
+        },
+        generation_config: {
+            max_output_tokens: 750,
+            temperature: 0.35,
+            thinking_level: "minimal",
+        },
+    });
+
+    return result.output_text;
+}
+
+async function generateValidatedRecipe(ingredients) {
+    const recipePrompt = `Create one realistic recipe using: ${ingredients}.
+Choose the dish from the ingredients, then return JSON only.
+Use the supplied ingredients as the main ingredients; pantry basics such as salt, pepper, oil, water, and dry spices are allowed when useful.
+Include 2 servings, 2 to 7 ingredients, 1 to 3 swaps for every ingredient, and 5 to 7 complete steps.
+Steps must match the chosen dish: assemble sandwiches, blend smoothies, and cook fried rice appropriately. Do not chop bread or cook ingredients that should remain raw.
+Check that the title, ingredients, and instructions make sense together before responding.`;
+
+    let firstOutput = "";
+
+    try {
+        firstOutput = await requestRecipeOutput(recipePrompt);
+        return parseRecipeOutput(firstOutput);
+    } catch (firstError) {
+        const repairPrompt = `Return ONLY valid JSON for a realistic recipe using: ${ingredients}.
+The previous response was invalid or did not match the recipe schema. Repair it now.
+Make the dish and instructions specific to the available ingredients, with 5 to 7 complete steps and swaps for every ingredient.
+Do not use generic pan-cooking instructions unless the dish truly needs them.
+Invalid response to repair: ${firstOutput || "No usable JSON was returned."}`;
+
+        const repairedOutput = await requestRecipeOutput(repairPrompt);
+        return parseRecipeOutput(repairedOutput);
+    }
+}
+
 app.post("/api/generate-recipe", async(request, response) =>{
     const ingredients = request.body?.ingredients?.trim();
 
@@ -85,52 +140,18 @@ app.post("/api/generate-recipe", async(request, response) =>{
     }
 
     try{
-        const result = await ai.interactions.create({
-            model: "gemini-3.6-flash",
-            input:`you are the JSON API for a ecipe application.
-        Create one practical recipe using: ${ingredients}
-        Return ONLY valid JSON. Do not use Markdown or \`\`\`json code blocks.
-        use exactly this structure:
-        {
-            "title":"recipe name",
-            "description": "short appetising description",
-            "servings":2,
-            "time":"25 min",
-            "difficulty":"Easy",
-            "ingredients":[
-            {
-                "name":"Eggs",
-                "amount":2,
-                "unit": "pieces",
-                "swaps":["tofy", "paneer"]
-            }],
-            "steps":[""Prepare the ingredients.",
-            "Cook everything in the pan.",
-            "Serve the finished recipe."]
-        }
+        const recipe = await Promise.race([
+            generateValidatedRecipe(ingredients),
+            new Promise((_, reject) => {
+                setTimeout(() => reject(new Error("Recipe generation timed out.")), RESPONSE_LIMIT_MS);
+            }),
+        ]);
 
-        Rules:
-        - Include 3 to 9 cooking steps.
-        - Include at least 2 ingredients.
-        - Every ingredient needs 1 to 3 realistic swaps.
-        - Use numbers for amount and text for unit.`,
-        
-        });
-
-        const jsonText = result.output_text
-        .replace(/^```json\s*/i,"")
-        .replace(/\s*```$/,"")
-        .trim();
-        
-        const parsedRecipe = recipeSchema.parse(JSON.parse(jsonText));
-        
-
-        return response.json(parsedRecipe);
+        return response.json(recipe);
     } catch(error){
         console.error("Recipe generation failed:", error.message);
-
         return response.status(502).json({
-            error:"We could not create a recipe right now. Please try again.",
+            error: "We could not create a complete recipe right now. Please try again.",
         });
     }
 });

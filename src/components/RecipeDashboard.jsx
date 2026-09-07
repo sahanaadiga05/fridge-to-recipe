@@ -3,6 +3,26 @@ import { ChefHat, Clock3, Leaf } from "lucide-react";
 import IngredientList from "./IngredientList";
 import RecipeSteps from "./RecipeSteps";
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function applyIngredientSwaps(steps, swappedIngredients) {
+  const swaps = Object.entries(swappedIngredients).sort(
+    ([firstName], [secondName]) => secondName.length - firstName.length
+  );
+
+  return steps.map((step) =>
+    swaps.reduce(
+      (updatedStep, [originalName, replacement]) =>
+        updatedStep.replace(
+          new RegExp(`\\b${escapeRegExp(originalName)}\\b`, "gi"),
+          replacement
+        ),
+      step
+    )
+  );
+}
 
 function RecipeDashboard({
   recipe,
@@ -15,6 +35,8 @@ function RecipeDashboard({
   onOpenSwap,
   onChooseSwap,
 }) {
+  const displaySteps = applyIngredientSwaps(recipe.steps, swappedIngredients);
+
   return (
     <motion.section
       className="recipe-dashboard"
@@ -57,7 +79,7 @@ function RecipeDashboard({
         />
 
         <RecipeSteps
-          steps={recipe.steps}
+          steps={displaySteps}
           completedSteps={completedSteps}
           onToggleStep={onToggleStep}
         />

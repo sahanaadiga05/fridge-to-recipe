@@ -50,7 +50,7 @@ function App() {
     setSwappedIngredients({});
     setOpenSwap(null);
 
-    const timeoutId = window.setTimeout(() => controller.abort(), 60000);
+    const timeoutId = window.setTimeout(() => controller.abort(), 8000);
 
     try {
       const apiResponse = await fetch(
