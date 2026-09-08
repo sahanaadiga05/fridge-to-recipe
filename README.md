@@ -67,10 +67,17 @@ This starts both services together:
 5. Change the serving count, adjust quantities, use **Swap** for substitutions, and tick steps off while cooking.
 
 ## AI Usage Note
+## AI Usage
 
-The backend sends the user's ingredient list to the Gemini model `gemini-3.5-flash-lite`. The prompt asks Gemini to choose an appropriate dish and return valid JSON only.
+I used Codex AI as a learning and coding assistant during this project.
 
-Before a recipe is sent to the frontend, the server validates its title, description, quantities, swaps, and cooking steps with Zod. If the first response is incomplete or malformed, the server makes one repair attempt. The frontend never receives the API key.
+- The UI design, color choices, kitchen theme, layout ideas, animations, and overall user experience were my own ideas.
+- I used Codex AI to help me understand React, CSS, API integration, debugging, and structured JSON validation.
+- I used the Google Gemini API to generate dynamic recipes from ingredients entered by users.
+- Codex AI helped me implement and refine my ideas, but I reviewed the work, made the design decisions, tested the application, and adjusted it based on the project requirements.
+
+AI was used as development support while I built and understood the project.
+
 
 ## Known Limitations
 
